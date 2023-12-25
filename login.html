@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="loginstyle.css">
+    <title>Login Page</title>
+</head>
+<body>
+    <form method="post" action="LoginServlet">
+
+            
+        <h1>LOGIN </h1>
+        <label for="user">
+            <input type="text" name="user" id="user" placeholder="User name">
+        </label>
+        
+        <label for="password">
+            <input type="password" name="password" id="password" placeholder="Password">
+        </label>
+        
+
+    
+        <button type="submit" value="LOGIN"  onclick="return validatelogin()">LOGIN</button>
+
+
+    <label  class="singup">Not a member?<a href="registrationpage.html">signup now</a></label>
+    
+</form>
+    
+</body>
+</html>
