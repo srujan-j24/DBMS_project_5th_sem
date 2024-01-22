@@ -93,6 +93,6 @@ CREATE TABLE IF NOT EXISTS personal_info(
     batch_ID int,
     primary key(college_ID),
     foreign key(college_ID) references student(college_ID) on delete cascade,
-    foreign key(batch_ID) references batch(year) on delete cascade,
+    foreign key(batch_ID) references batch(year) on delete cascade
 );
 
