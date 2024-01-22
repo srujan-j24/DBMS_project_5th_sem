@@ -4,7 +4,7 @@ USE studentDB;
 
 CREATE TABLE IF NOT EXISTS batch(
     year int,
-    primary key(year);
+    primary key(year)
 );
 
 CREATE TABLE IF NOT EXISTS student (
