@@ -2,12 +2,12 @@ CREATE DATABASE IF NOT EXISTS studentDB;
 
 USE studentDB;
 
-CREATE TABLE batch(
+CREATE TABLE IF NOT EXISTS batch(
     year int,
     primary key(year)
 );
 
-CREATE TABLE student (
+CREATE TABLE IF NOT EXISTS student (
     Name varchar(50),
     college_ID varchar(20),
     USN varchar(15),
@@ -17,7 +17,7 @@ CREATE TABLE student (
     foreign key(batch_ID) references batch(year) on delete cascade
 );
 
-CREATE TABLE marks(
+CREATE TABLE IF NOT EXISTS marks(
     marks_ID varchar(10),
     sem1 json,
     sem2 json,
@@ -34,7 +34,7 @@ CREATE TABLE marks(
 
 
 
-CREATE TABLE scheme(
+CREATE TABLE IF NOT EXISTS scheme(
     scheme_ID varchar(20),
     branch varchar(30),
     sem1 json,
@@ -48,14 +48,14 @@ CREATE TABLE scheme(
     primary key(scheme_ID)
 );
 
-CREATE TABLE class(
+CREATE TABLE IF NOT EXISTS class(
     sem int,
     section int,
     branch varchar(30),
     primary key(sem,section,branch)
 );
 
-CREATE TABLE staff(
+CREATE TABLE IF NOT EXISTS staff(
     staff_ID varchar(20),
     department varchar(30),
     name varchar(30),
@@ -66,8 +66,8 @@ CREATE TABLE staff(
     primary key(staff_ID)
 );
 
-CREATE TABLE academic_info(
-    college_ID int,
+CREATE TABLE IF NOT EXISTS academic_info(
+    college_ID varchar(20),
     scheme_ID varchar(10),
     batch_ID int,
     marks_ID varchar(30),
@@ -82,8 +82,8 @@ CREATE TABLE academic_info(
     foreign key(sem,section,branch) references class(sem,section,branch) on delete cascade
 );
 
-CREATE TABLE personal_info(
-    college_ID int,
+CREATE TABLE IF NOT EXISTS personal_info(
+    college_ID varchar(20),
     blood_type varchar(3),
     dob date,
     personal_phone bigint,
