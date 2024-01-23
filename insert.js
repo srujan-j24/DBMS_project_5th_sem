@@ -23,13 +23,13 @@ async function  execute_query(){
 
 
 function getRandomIndex(ary_length){
-        return Math.floor(Math.random() * ary_length);
-      
-    //shoud take length of array and 
-    //return a random number 0 to ary_length
-    
+        return Math.floor(Math.random() * ary_length);    
 }
 
+function numtostr(number,length) {
+    const num=number;
+    const formattedNumber = num.toString().padStart(length, '0');
+}
 
 async function getbatchID(batch){
     let res = await  pool.query(`SELECT total_students FROM batch WHERE batch.year = ${batch};`);
