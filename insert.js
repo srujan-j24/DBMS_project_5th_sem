@@ -23,7 +23,8 @@ async function  execute_query(){
 
 
 function getRandomIndex(ary_length){
-    //complete this function
+        return Math.floor(Math.random() * ary_length);
+      
     //shoud take length of array and 
     //return a random number 0 to ary_length
     
