@@ -4,6 +4,7 @@ USE studentDB;
 
 CREATE TABLE IF NOT EXISTS batch(
     year int,
+    total_students int DEFAULT 0,
     primary key(year)
 );
 

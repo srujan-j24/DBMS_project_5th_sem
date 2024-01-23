@@ -1,11 +1,11 @@
-// import { faker } from "@faker-js/faker";
+import { fakerEN_IN as faker } from "@faker-js/faker";
 import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
 
 
 
-console.log(process.env.PORTNUM)
+
 const pool = mysql.createPool({
     host: process.env.HOSTNAME,
     port: process.env.PORTNUM,       
@@ -21,4 +21,36 @@ async function  execute_query(){
     console.log(res);
 }
 
-execute_query();
+
+function getRandomIndex(ary_length){
+    //complete this function
+    //shoud take length of array and 
+    //return a random number 0 to ary_length
+    
+}
+
+
+async function getbatchID(batch){
+    let res = await  pool.query(`SELECT total_students FROM batch WHERE batch.year = ${batch};`);
+    console.log(res);
+}
+
+function getRandomStudent(batch){
+    if(!Number.isInteger(batch)){
+        console.log("Enter a valid batch number");
+        return;
+    }
+    let name = `${faker.person.firstName()} ${faker.person.lastName()}`;
+    let college_id = `${batch}${getbatchID(batch)}`;
+}
+
+getbatchID(2021);
+
+
+async function init_newBatch(year){
+    if(!Number.isInteger()){
+        console.error(`${year} is not a valid year`);
+        return;
+    }
+    let res = await pool.query('')
+}
