@@ -56,7 +56,7 @@ async function getRandomStudent(batch){
     })
 }
 
-getRandomStudent(2021);
+
 
 
 async function init_newBatch(year){
@@ -66,3 +66,6 @@ async function init_newBatch(year){
     }
     let res = await pool.query('')
 }
+
+
+getRandomStudent(2021);
