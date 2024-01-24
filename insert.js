@@ -23,29 +23,40 @@ async function  execute_query(){
 
 
 function getRandomIndex(ary_length){
-        return Math.floor(Math.random() * ary_length);    
+    return Math.floor(Math.random() * ary_length);    
 }
 
-function numtostr(number,length) {
-    const num=number;
+function padbatchID(number,length) {
+    const num = number;
     const formattedNumber = num.toString().padStart(length, '0');
+    return formattedNumber;
 }
+// numtostr(44, 3);
 
 async function getbatchID(batch){
-    let res = await  pool.query(`SELECT total_students FROM batch WHERE batch.year = ${batch};`);
-    console.log(res);
+    let res = await  pool.query(`SELECT count(*) as total_students from student where batch_ID = ${batch};`);
+    res = res[0][0].total_students;
+    return padbatchID(res+1, 4);
 }
 
-function getRandomStudent(batch){
+async function getRandomStudent(batch){
     if(!Number.isInteger(batch)){
         console.log("Enter a valid batch number");
         return;
     }
     let name = `${faker.person.firstName()} ${faker.person.lastName()}`;
-    let college_id = `${batch}${getbatchID(batch)}`;
+    let college_id = `${batch}${await getbatchID(batch)}`;
+    let batch_id = batch;
+    let password = faker.internet.password();
+    console.log({
+        s_name: name,
+        s_id: college_id,
+        s_batch_id: batch_id,
+        s_pswd: password
+    })
 }
 
-getbatchID(2021);
+getRandomStudent(2021);
 
 
 async function init_newBatch(year){
