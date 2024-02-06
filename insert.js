@@ -16,10 +16,7 @@ const pool = mysql.createPool({
 
 
 
-async function  execute_query(){
-    const res = await pool.query("SELECT * from student");
-    console.log(res);
-}
+
 
 
 function getRandomIndex(ary_length){
@@ -49,7 +46,6 @@ async function getRandomStudent(batch){
     let college_id = `${batch}${await getbatchID(batch)}`;
     let batch_id = batch;
     let password = faker.internet.password();
-
     return [name, college_id, batch_id, password];
 }
 
@@ -61,10 +57,16 @@ async function insertStudent(student_ary){
 
 
 async function init_newBatch(year){
-    if(!Number.isInteger()){
+    if(!Number.isInteger(year)){
         console.error(`${year} is not a valid year`);
         return;
     }
-    let res = await pool.query('')
+    let res = await pool.query('INSERT INTO batch(year) VALUES (?)', [year]);
+    console.log(res);
 }
-let i = 100;
+// for(let i = 0; i < 4; i++){
+//  await insertStudent(await getRandomStudent(2021));
+// }
+
+
+init_newBatch(2022);
