@@ -1,8 +1,7 @@
-import { fakerEN_IN as faker } from "@faker-js/faker";
+import { fa, fakerEN_IN as faker } from "@faker-js/faker";
 import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
-
 
 
 
@@ -54,6 +53,7 @@ async function insertStudent(student_ary){
     let res = await pool.query(`INSERT INTO STUDENT(Name, College_ID, batch_ID, password) VALUES (?);`, [student_ary]);
     console.log(res);
 }
+// getRandomStudent(2021);
 
 
 async function init_newBatch(year){
@@ -61,12 +61,38 @@ async function init_newBatch(year){
         console.error(`${year} is not a valid year`);
         return;
     }
-    let res = await pool.query('INSERT INTO batch(year) VALUES (?)', [year]);
-    console.log(res);
+    let res = await pool.query('')
 }
-// for(let i = 0; i < 4; i++){
-//  await insertStudent(await getRandomStudent(2021));
-// }
+async function getRandomStaff(department){
+    let count = await pool.query('select count(*) from staff;');
+
+    // console.log(count);
+    count = count[0][0]['count(*)']+1;
+    // console.log(count);
+    count = padbatchID(count,3);
+    let staff_ID = `ST_${count}`;
+    let name = `${faker.person.firstName()} ${faker.person.lastName()}`;
+    // console.log(staff_ID);
+    // console.log(name);
+    let access_data = '{}';
+    let is_HOD = false;
+    let is_Admin = false;
+    let password = `${ faker.internet.password()}`
+    // console.log(password);
+    return [staff_ID,department,name,access_data,is_HOD,is_Admin,password];
+    
+
+}
+
+async function insertStaff(){
+    let details = await getRandomStaff('cse');
+    let result = await pool.query('insert into staff values (?);',[details]);
+    console.log(result);
+
+}
 
 
-init_newBatch(2022);
+
+// getRandomStaff("CSE").then((e)=>{console.log(e)})
+insertStaff();
+
