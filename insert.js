@@ -1,8 +1,7 @@
-import { fakerEN_IN as faker } from "@faker-js/faker";
+import { fa, fakerEN_IN as faker } from "@faker-js/faker";
 import mysql from "mysql2";
 import dotenv from "dotenv";
 dotenv.config();
-
 
 
 
@@ -48,15 +47,10 @@ async function getRandomStudent(batch){
     let college_id = `${batch}${await getbatchID(batch)}`;
     let batch_id = batch;
     let password = faker.internet.password();
-    console.log({
-        s_name: name,
-        s_id: college_id,
-        s_batch_id: batch_id,
-        s_pswd: password
-    })
+    return [name, college_id, batch_id, password];
 }
 
-getRandomStudent(2021);
+// getRandomStudent(2021);
 
 
 async function init_newBatch(year){
@@ -66,3 +60,36 @@ async function init_newBatch(year){
     }
     let res = await pool.query('')
 }
+async function getRandomStaff(department){
+    let count = await pool.query('select count(*) from staff;');
+
+    // console.log(count);
+    count = count[0][0]['count(*)']+1;
+    // console.log(count);
+    count = padbatchID(count,3);
+    let staff_ID = `ST_${count}`;
+    let name = `${faker.person.firstName()} ${faker.person.lastName()}`;
+    // console.log(staff_ID);
+    // console.log(name);
+    let access_data = '{}';
+    let is_HOD = false;
+    let is_Admin = false;
+    let password = `${ faker.internet.password()}`
+    // console.log(password);
+    return [staff_ID,department,name,access_data,is_HOD,is_Admin,password];
+    
+
+}
+
+async function insertStaff(){
+    let details = await getRandomStaff('cse');
+    let result = await pool.query('insert into staff values (?);',[details]);
+    console.log(result);
+
+}
+
+
+
+// getRandomStaff("CSE").then((e)=>{console.log(e)})
+insertStaff();
+
