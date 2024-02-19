@@ -52,9 +52,17 @@ async function insertStudent(student_ary){
     console.log(student_ary);
     let res = await pool.query(`INSERT INTO STUDENT(Name, College_ID, batch_ID, password) VALUES (?);`, [student_ary]);
     console.log(res);
+
 }
 // getRandomStudent(2021);
+async function insertNStudents(n){
+    for(let i = 0; i < n; i++){
+        let details = await getRandomStudent(2022);
+        await insertStudent(details);
+    }
+}
 
+insertNStudents(10)
 
 async function init_newBatch(year){
     if(!Number.isInteger(year)){
