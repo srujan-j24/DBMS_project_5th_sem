@@ -6,6 +6,7 @@ let port = "3000";
 app.use(express.static(path.join(__dirname, "/public/css")));
 app.use(express.static(path.join(__dirname, "/public/js")));
 app.use(express.static(path.join(__dirname, "/public/image")));
+app.use(express.static(path.join(__dirname, "/public/font")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/views"));
 
