@@ -76,6 +76,9 @@ body{
 hr{
     width: 95%;
     margin: 0;
+    place-self: center;
+    margin:0 2.5%;
+    box-sizing: border-box;
 }
 #Info-grid{
     display: grid;
