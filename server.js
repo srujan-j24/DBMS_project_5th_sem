@@ -20,3 +20,6 @@ app.get("/", (req, res)=>{
 app.get("/student", (req, res)=>{
     res.render("studentinfo.ejs");
 });
+app.get("/staffdashboard",(req,res)=>{
+    res.render("staffdashboard.ejs");
+});
