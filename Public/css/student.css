@@ -29,7 +29,8 @@ body{
 }
 .nav-btns{
     height: 50%;
-    font-size: 1.2rem;
+    /* font-size: 1.2rem; */
+    font-size: 120%;
     border: 0;
     outline: 0 solid grey;
     transition: 300ms;
@@ -61,12 +62,12 @@ body{
     border: 0;
     transition: 300ms;
     border-radius: 0.5rem;
-    background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 #logout:hover{
     outline: 1px solid grey;
     outline-offset: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 #logo-txt{
     font-family: "Inknut Antiqua", serif;
