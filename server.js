@@ -17,3 +17,6 @@ app.listen(port, ()=>{
 app.get("/", (req, res)=>{
     res.render("login.ejs");
 });
+app.get("/student", (req, res)=>{
+    res.render("studentinfo.ejs");
+});

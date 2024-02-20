@@ -1,0 +1,48 @@
+*{
+    font-family: "Inter",sans-serif;
+}
+#navigation{
+    background-color: aquamarine;
+    height: 12%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+#table-container{
+    background-color: blue;
+    height: 90%;
+}
+body{
+    height:100vh;
+    margin:0;
+}
+.sem-btn{
+    
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+
+}
+.nav-btns{
+    height: 60%;
+    font-size: 1.2rem;
+  
+}
+#personal-btn{
+    
+    aspect-ratio: 3.5 / 1;
+    border-radius: 2rem;
+}
+#nav-btns-cont{
+    flex-grow: 1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}
+#logout{
+    height: 60%;
+    aspect-ratio: 1 / 1;
+}
