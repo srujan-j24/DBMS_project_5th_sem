@@ -61,12 +61,12 @@ body{
     border: 0;
     transition: 300ms;
     border-radius: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.1);
     cursor: pointer;
 }
 #logout:hover{
     outline: 1px solid grey;
     outline-offset: 0.25rem;
-    background-color: rgba(0, 0, 0, 0.1);
 }
 #logo-txt{
     font-family: "Inknut Antiqua", serif;
@@ -74,10 +74,9 @@ body{
     margin: 0;
 }
 hr{
-    width: 95%;
     margin: 0;
     place-self: center;
-    margin:0 2.5%;
+    margin:0 3rem;
     box-sizing: border-box;
 }
 #Info-grid{
