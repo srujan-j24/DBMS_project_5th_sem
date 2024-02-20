@@ -2,7 +2,7 @@
     font-family: "Inter",sans-serif;
 }
 #navigation{
-    background-color: aquamarine;
+    background-color: white;
     height: 12%;
     display: flex;
     gap: 1rem;
@@ -11,7 +11,7 @@
     padding: 0 2rem;
 }
 #table-container{
-    background-color: blue;
+    background-color: white;
     height: 90%;
 }
 body{
@@ -45,4 +45,11 @@ body{
 #logout{
     height: 60%;
     aspect-ratio: 1 / 1;
+}
+#logo-txt{
+    font-family: "Inknut Antiqua", serif;
+    font-size: 2rem;
+}
+hr{
+    width: 95%;
 }
