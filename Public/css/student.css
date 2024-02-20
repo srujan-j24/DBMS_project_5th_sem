@@ -32,8 +32,8 @@ body{
     /* font-size: 1.2rem; */
     font-size: 120%;
     border: 0;
-    outline: 1 solid grey;
-    outline-offset: -1.5rem;
+    outline: 1px solid transparent;
+    outline-offset: -2px;
     transition: 300ms;
     cursor: pointer;
 }
@@ -64,8 +64,8 @@ body{
     transition: 300ms;
     border-radius: 0.5rem;
     cursor: pointer;
-    outline: 1 solid grey;
-    outline-offset: -2rem;
+    outline: 1px solid transparent;
+    outline-offset: -3px;
 }
 #logout:hover{
     outline: 1px solid grey;
