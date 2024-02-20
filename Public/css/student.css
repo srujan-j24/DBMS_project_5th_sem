@@ -30,12 +30,21 @@ body{
 .nav-btns{
     height: 60%;
     font-size: 1.2rem;
-  
+    border: 0;
+    outline: 0 solid grey;
+    transition: 300ms;
+    cursor: pointer;
+}
+.nav-btns:hover{
+    outline: 1px solid grey;
+    outline-offset: 0.25rem;
+    
 }
 #personal-btn{
     
     aspect-ratio: 3.5 / 1;
     border-radius: 2rem;
+    background-color: peachpuff;
 }
 #nav-btns-cont{
     flex-grow: 1;
@@ -46,8 +55,18 @@ body{
     gap:1rem;
 }
 #logout{
-    height: 60%;
+    height: 50%;
     aspect-ratio: 1 / 1;
+    background: transparent;
+    border: 0;
+    transition: 300ms;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+#logout:hover{
+    outline: 1px solid grey;
+    outline-offset: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.1);
 }
 #logo-txt{
     font-family: "Inknut Antiqua", serif;
@@ -69,4 +88,28 @@ hr{
 }
 .grid-items{
     background-color: cadetblue;
+}
+#btn1{
+    background-color: #A5FCCC;
+}
+#btn2{
+    background-color: #76F5C8;
+}
+#btn3{
+    background-color:#F5D076 ;
+}
+#btn4{
+    background-color:#F5AD7C ;
+}
+#btn5{
+    background-color:#D0EFFA ;
+}
+#btn6{
+    background-color: #76DBF5;
+}
+#btn7{
+    background-color:#aab6cc ;
+}
+#btn8{
+    background-color: #e3a3b6;
 }
