@@ -32,13 +32,14 @@ body{
     /* font-size: 1.2rem; */
     font-size: 120%;
     border: 0;
-    outline: 0 solid grey;
+    outline: 1 solid grey;
+    outline-offset: -1.5rem;
     transition: 300ms;
     cursor: pointer;
 }
 .nav-btns:hover{
     outline: 1px solid grey;
-    outline-offset: 0.25rem;
+    outline-offset: 0.3rem;
     
 }
 #personal-btn{
@@ -63,6 +64,8 @@ body{
     transition: 300ms;
     border-radius: 0.5rem;
     cursor: pointer;
+    outline: 1 solid grey;
+    outline-offset: -2rem;
 }
 #logout:hover{
     outline: 1px solid grey;
