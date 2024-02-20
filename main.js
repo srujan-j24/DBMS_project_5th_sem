@@ -4,8 +4,9 @@ const mysql = require("mysql2");
 const connection_pool = mysql.createPool({
     host: "localhost",
     user: "root",
-    password: "4922",
-    database: "studentdb"  
+    password: "RASHMITHA",
+    database: "studentdb",
+    port:3307  
 });
 
 let sql_query = 'Show tables;';
