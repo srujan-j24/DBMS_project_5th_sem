@@ -22,6 +22,8 @@ h1 {
 }
 #gi-left{
   background-image: url(/login.jpeg);
+  background-size: cover;
+  background-position: center;
 }
 #gi-right{
   background-color: #00A9FF;
