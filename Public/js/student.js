@@ -1,6 +1,7 @@
 /*const headers = document.querySelectorAll('.header');*/
 
 const buttons = document.querySelectorAll('.sem-btn');
+const root = document.documentElement;
 
 buttons.forEach(button =>{
     button.addEventListener('click',()=> {
