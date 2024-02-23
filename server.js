@@ -29,7 +29,10 @@ app.get("/", (req, res)=>{
 app.get("/student", (req, res)=>{
     if(req.cookies.student && req.cookies.student.ID =='20210001'){
     res.render("studentinfo.ejs");
-    }
+    }//content of cookie is present
+    else{
+        res.render("login.ejs");
+    }//content of cookie is not present or invalid
 });
 app.get("/staffdashboard",(req,res)=>{
     res.render("staffdashboard.ejs");
@@ -42,7 +45,7 @@ app.post("/login",(req,res)=>{
    //console.log(password);
    //console.log(req.body);
    if(username == "admin"&& password == "admin"){
-        res.cookie('student',{ID:'20210001'},{maxAge:10*60*1000,httpOnly:true})
+        res.cookie('student',{ID:'20210001'},{maxAge:1*60*1000,httpOnly:true})
         res.status(200).send("/student")
    }
    else{
