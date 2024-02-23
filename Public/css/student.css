@@ -121,49 +121,30 @@ hr{
     align-items: flex-start;
     padding: 2rem 2rem;
 }
-.table-grids{
+#table{
     display: grid;
-    grid-auto-rows: 3rem;
     flex-grow: 1;
+    grid-template-columns: repeat(16,1fr);
+    grid-auto-rows: 3rem;
     gap: 1px;
-    
 }
-.g-header1, .g-header2{
-    background-color: #A5FCCC;
-
-}
-.g-header2{
+.hr2{
     grid-row: span 2;
 }
-#child-grid1{
-    grid-template-columns: 1fr 1fr 1fr;
-}
-#child-grid2{
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-}
-#child-grid3{
-    grid-template-columns: repeat(3, 1fr);
-}
-#child-grid4{
-    grid-template-columns: repeat(2, 1fr);
-}
-#child-grid5{
-    grid-template-columns: repeat(4, 1fr);
-}
-#g-hs4{
+.hc4{
     grid-column: span 4;
 }
-#g-hs3{
+.hc3{
     grid-column: span 3;
 }
-#g-hs2{
+.hc2{
     grid-column: span 2;
 }
-.txt-cntr{
+.header{
+    background-color: #A5FCCC;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-.lg{
-    background-color: #a5fccc42;
+    padding: 0.5rem;
+    box-sizing: border-box;
 }

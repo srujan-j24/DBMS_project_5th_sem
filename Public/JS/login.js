@@ -8,6 +8,7 @@ form.submit((event)=>{
     };
     $.ajax({type:"POST",url:"/login",data:formData})
         .done((response)=>{
-            console.log(response)
+            //console.log(response)
+            window.location.href = response
         })
 })
