@@ -5,6 +5,18 @@ const bodyparser = require("body-parser")
 const cookie = require("cookie-parser")
 let port = "3000";
 
+import mysql from "mysql2";
+import dotenv from "dotenv";
+dotenv.config();
+
+const pool = mysql.createPool({
+    host: process.env.HOSTNAME,
+    port: process.env.PORTNUM,       
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,    
+    database: process.env.DBNAME
+}).promise();
+
 app.use(express.static(path.join(__dirname, "/public/css")));
 app.use(express.static(path.join(__dirname, "/public/js")));
 app.use(express.static(path.join(__dirname, "/public/image")));
@@ -29,6 +41,7 @@ app.get("/", (req, res) => {
     }
 
 });
+
 app.get("/student", (req, res) => {
     if (req.cookies.student && req.cookies.student.ID == '20210001') {
         res.render("studentinfo.ejs");
@@ -37,6 +50,7 @@ app.get("/student", (req, res) => {
         res.render("login.ejs");
     }//content of cookie is not present or invalid
 });
+
 app.get("/staffdashboard", (req, res) => {
     if (req.cookies.staff && req.cookies.staff.ID == 'S001') {
         res.render("staffdashboard.ejs");
@@ -44,7 +58,6 @@ app.get("/staffdashboard", (req, res) => {
     else {
         res.render("login.ejs");
     }
-    //  res.render("staffdashboard.ejs");
 });
 // app.post("/login",(req,res)=>{
 //    // console.log(req.body)
