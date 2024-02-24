@@ -38,13 +38,13 @@ app.get("/student", (req, res) => {
     }//content of cookie is not present or invalid
 });
 app.get("/staffdashboard", (req, res) => {
-    if (req.cookies.student && req.cookies.student.ID == 'S001') {
+    if (req.cookies.staff && req.cookies.staff.ID == 'S001') {
         res.render("staffdashboard.ejs");
     }//content of cookie is present
     else {
         res.render("login.ejs");
     }
-     res.render("staffdashboard.ejs");
+    //  res.render("staffdashboard.ejs");
 });
 // app.post("/login",(req,res)=>{
 //    // console.log(req.body)
@@ -69,7 +69,6 @@ app.post("/login", (req, res) => {
     // Regular expression to match exactly 8 digits
     let usernameRegex = /^\d{8}$/;
     let susernameRegex = /^S\d{3}$/;
-
     // Check if the username matches the pattern
     if (usernameRegex.test(username)) {
         // If username is valid, set the student cookie and redirect
@@ -77,7 +76,7 @@ app.post("/login", (req, res) => {
         res.status(200).send("/student");
     }
     else if (susernameRegex.test(username)) {
-        res.cookie('staffdashboard', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
+        res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
         res.status(200).send("/staffdashboard");
     }
     else {
