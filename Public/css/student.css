@@ -149,13 +149,8 @@ hr{
     align-items: center;
     padding: 0.5rem;
     box-sizing: border-box;
-<<<<<<< HEAD
-   
     background-color: var(--header-color);
     transition-duration: 500ms;
-=======
-    background-color: var(--header-color);
->>>>>>> Vishrutha's-Branch
 }
 
 :root {
@@ -163,12 +158,5 @@ hr{
 }
      
   
-<<<<<<< HEAD
   
   
-=======
-  /* #toggleDiv {
-    
-  }
-   */
->>>>>>> Vishrutha's-Branch
