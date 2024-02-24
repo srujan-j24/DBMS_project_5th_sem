@@ -62,3 +62,65 @@ hr{
 #class{
     font-size: 1rem;
 }
+/* Reset default margin and padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav p {
+    font-weight: bold;
+}
+
+#logout {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+hr {
+    border: none;
+    border-top: 1px solid #ccc;
+}
+
+.gridcontainer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.griditem {
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+#subcode {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#sub {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+#class {
+    font-size: 14px;
+    margin-top: 5px;
+    color: #666;
+}
