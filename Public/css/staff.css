@@ -1,0 +1,64 @@
+body{
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    
+
+}
+nav{
+    height: 10vh;
+    margin: 0;
+    /* background-color: aqua; */
+    display: flex;
+    flex-direction: row;
+    padding: 0 2rem 0 2rem;
+    align-items: center;
+    justify-content:space-between;
+    
+}
+p{
+    margin: 0;
+    font-size: 2.5rem;
+}
+#logout{
+    height: 50%;
+    aspect-ratio: 1 / 1;
+    background: transparent;
+    border: 0;
+    transition: 300ms;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+#logout:hover{
+    outline: 1px solid grey;
+    outline-offset: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+hr{
+    margin: 0;
+    place-self: center; 
+    margin:0 3rem;
+    box-sizing: border-box;
+}
+.gridcontainer{
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+    padding: 2.5rem;
+    
+}
+.griditem{
+    height: 15rem;
+    background-color: wheat;
+    border-radius:1rem ;
+}
+#subcode{
+    font-size: 1rem;
+}
+#sub{
+    font-size: 2rem;
+}
+#class{
+    font-size: 1rem;
+}

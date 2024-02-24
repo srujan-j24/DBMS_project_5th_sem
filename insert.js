@@ -13,11 +13,6 @@ const pool = mysql.createPool({
     database: process.env.DBNAME
 }).promise();
 
-
-
-
-
-
 function getRandomIndex(ary_length){
     return Math.floor(Math.random() * ary_length);    
 }

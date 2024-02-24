@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/student.css">
+    
+   
+    <title>Document</title>
+</head>
+<body>
+    <div id="navigation">
+        <p id="logo-txt">Student Info</p>
+        <div id="nav-btns-cont">
+            <button id="personal-btn" class="nav-btns">Personal Info</button>
+            <button class="sem-btn nav-btns" id="btn1">1</button>
+            <button class="sem-btn nav-btns" id="btn2" >2</button>
+            <button class="sem-btn nav-btns" id="btn3" >3</button>
+            <button class="sem-btn nav-btns" id="btn4" >4</button>
+            <button class="sem-btn nav-btns" id="btn5" >5</button>
+            <button class="sem-btn nav-btns" id="btn6" >6</button>
+            <button class="sem-btn nav-btns" id="btn7" >7</button>
+            <button class="sem-btn nav-btns" id="btn8" >8</button>
+        </div>
+        <button id="logout">
+            <img src="/logout.svg" alt="">
+        </button>
+        
+
+    </div>
+    <hr>
+    <div>
+    </div>
+    <div id="table-container">
+        <div id="table">
+            <!-- hr2 = header rowspan 2 -->
+            <div class="header hr2" id="toggleDiv">Subject code</div>
+            <div class="header hr2" id="toggleDiv">Credits</div>
+            <div class="header hr2" id="toggleDiv">Attendance</div>
+            <div class="header hc4" id="toggleDiv">Unit Tests</div>
+            <div class="header hc3" id="toggleDiv">Assignment</div>
+            <div class="header hc2" id="toggleDiv">Quiz</div>
+            <div class="header hr2" id="toggleDiv">CIE</div>
+            <div class="header hr2" id="toggleDiv">SEE</div>
+            <div class="header hr2" id="toggleDiv">Grade Point</div>
+            <div class="header hr2" id="toggleDiv">Grade</div>
+            <div class="header" id="toggleDiv">1</div>
+            <div class="header" id="toggleDiv">2</div>
+            <div class="header" id="toggleDiv">3</div>
+            <div class="header" id="toggleDiv">Avg</div>
+            <div class="header" id="toggleDiv">1</div>
+            <div class="header" id="toggleDiv">2</div>
+            <div class="header" id="toggleDiv">Avg</div>
+            <div class="header" id="toggleDiv">1</div>
+            <div class="header" id="toggleDiv">Avg</div>
+            <% for(let i=0;i<32;i++){ %>
+                <div <% if(i<16==0) { %> class=<%="grid-item"%> <% } %>
+                >
+                
+                    <%=i%>
+                </div>
+            <% } %>
+
+        </div>
+    </div>
+    <script src="/student.js"></script>
+</body>
+</html>
