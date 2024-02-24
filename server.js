@@ -5,8 +5,8 @@ const bodyparser = require("body-parser")
 const cookie = require("cookie-parser")
 let port = "3000";
 
-import mysql from "mysql2";
-import dotenv from "dotenv";
+const mysql = require("mysql2");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = mysql.createPool({
@@ -41,14 +41,20 @@ app.get("/", (req, res) => {
     }
 
 });
-
-app.get("/student", (req, res) => {
-    if (req.cookies.student && req.cookies.student.ID == '20210001') {
-        res.render("studentinfo.ejs");
+app.get("/student", async(req, res)=>{
+    try{
+    if(req.cookies.student && req.cookies.student.ID =='20220002'){
+        const [rows, fields] = await pool.query("SELECT * FROM student WHERE college_ID = ?", [req.cookies.student.ID]);
+        res.render("studentinfo.ejs", { studentdb: rows[0] });
     }//content of cookie is present
     else {
         res.render("login.ejs");
     }//content of cookie is not present or invalid
+}
+catch (error) {
+    console.error("Error fetching student data:", error);
+    res.status(500).send("Internal Server Error");
+}
 });
 
 app.get("/staffdashboard", (req, res) => {
