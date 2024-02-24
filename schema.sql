@@ -14,6 +14,7 @@ CREATE TABLE IF NOT EXISTS student (
     USN varchar(15),
     batch_ID int,
     password varchar(30),
+    isLogged boolean,
     primary key(college_ID),
     foreign key(batch_ID) references batch(year) on delete cascade
 );
@@ -63,6 +64,7 @@ CREATE TABLE IF NOT EXISTS staff(
     access_data json,
     is_HOD boolean,
     is_Admin boolean,
+    is_Logged boolean,
     password varchar(30),
     primary key(staff_ID)
 );
