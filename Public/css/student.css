@@ -143,20 +143,20 @@ hr{
     grid-column: span 2;
 }
 .header{
-    background-color:#A5FCCC ;
+    /*background-color:#A5FCCC ;*/
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 0.5rem;
     box-sizing: border-box;
     background-color: var(--header-color);
+    transition-duration: 500ms;
 }
 
 :root {
-    --header-color: #ccc; /* Default color */
-  }
+    --header-color: #ccc;
+}
+     
   
-  /* #toggleDiv {
-    
-  }
-   */
+  
+  
