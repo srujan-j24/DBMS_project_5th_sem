@@ -2,10 +2,8 @@ const { faker } = require('@faker-js/faker');
 const mysql = require("mysql2");
 const connection_json = require("./personal.json"); //alter this as per your mysql port and password
 
-<<<<<<< Updated upstream
 
-const connection_pool = mysql.createPool(connection_json);
-=======
+// const connection_pool = mysql.createPool(connection_json);
 const connection_pool = mysql.createPool({
     host: "localhost",
     user: "root",
@@ -13,19 +11,15 @@ const connection_pool = mysql.createPool({
     database: "studentdb",
     port:3300
 });
->>>>>>> Stashed changes
 
 let sql_query = 'Show tables;';
 
 connection_pool.query(sql_query, (err, res)=>{
     console.log(res);
-<<<<<<< Updated upstream
 
 });
-=======
     
-})
->>>>>>> Stashed changes
+// })
 
 
 

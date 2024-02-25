@@ -1,6 +1,7 @@
-import { fa, fakerEN_IN as faker } from "@faker-js/faker";
+import { fakerEN_IN as faker } from "@faker-js/faker";
 import mysql from "mysql2";
 import dotenv from "dotenv";
+
 dotenv.config();
 
 
@@ -98,4 +99,6 @@ async function insertStaff(){
 
 // getRandomStaff("CSE").then((e)=>{console.log(e)})
 insertStaff();
+
+
 
