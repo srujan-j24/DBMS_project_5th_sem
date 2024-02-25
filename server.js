@@ -5,19 +5,6 @@ const bodyparser = require("body-parser")
 const cookie = require("cookie-parser")
 let port = "3000";
 
-import mysql from "mysql2";
-import dotenv from "dotenv";
-dotenv.config();
-
-const pool = mysql.createPool({
-    host: process.env.HOSTNAME,
-    port: process.env.PORTNUM,       
-    user: process.env.DBUSER,
-    password: process.env.DBPASSWORD,    
-    database: process.env.DBNAME
-}).promise();
-
-
 app.use(express.static(path.join(__dirname, "/public/css")));
 app.use(express.static(path.join(__dirname, "/public/js")));
 app.use(express.static(path.join(__dirname, "/public/image")));
