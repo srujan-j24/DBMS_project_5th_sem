@@ -92,6 +92,7 @@ app.post("/login", (req, res) => {
     // Check if the username matches the pattern
     if (usernameRegex.test(username)) {
         // If username is valid, set the student cookie and redirect
+            
         res.cookie('student', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
         res.status(200).send("/student");
     }

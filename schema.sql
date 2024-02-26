@@ -27,6 +27,7 @@ CREATE TABLE IF NOT EXISTS student(
     password varchar(30),
     cur_class_ID varchar(10),
     branch_ID varchar(10),
+    logged_in boolean,
     foreign key(branch_ID) references branch(ID) ON DELETE CASCADE,
     foreign key(batch_ID) references batch(year) ON DELETE CASCADE,
     foreign key(cur_class_ID) references class(ID) ON DELETE CASCADE
@@ -69,6 +70,7 @@ CREATE TABLE IF NOT EXISTS marks(
     sem6 json,
     sem7 json,
     sem8 json,
+    foreign key(college_ID) references student(college_ID) on DELETE CASCADE,
     foreign key(scheme_ID) references scheme(ID) ON DELETE CASCADE
 );
 
@@ -80,5 +82,6 @@ CREATE TABLE IF NOT EXISTS staff(
     is_admin boolean,
     password varchar(30),
     branch_ID varchar(10),
+    logged_in boolean,
     foreign key(branch_ID) references branch(ID) ON DELETE CASCADE 
 );
