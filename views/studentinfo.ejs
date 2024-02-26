@@ -34,15 +34,27 @@
     <hr>
     <div>
     </div>
-    <%= info.college_ID%>
-    <%= info.blood_type%>
-    <%= info.DOB %>
-    <%= info.personal_phone%>
-    <%= info.parent_phone%>
-    <%= info.address%>
-    <%= info.validity%>
+    <div id="personal-info-cont">
+        <div id="personal-info">
+            <div id="personal-pic">
+                <div></div>
+            </div>
+            <div id="personal-details">
+                <h2><%= info.name.toUpperCase()%></h2>
+                <div >
+                    <p class="keys">College ID </p><p class="vals">: <span class="vals"><%=info.college_ID%></span></p>
+                    <p class="keys">Blood type </p><p class="vals">: <span class="vals"><%=info.blood_type%></span></p>
+                    <p class="keys">D.O.B </p><p class="vals">: <span class="vals"><%= info.dob %></span></p>
+                    <p class="keys">Personal ph </p><p class="vals">: <span class="vals"><%= info.personal_phone%></span></p>
+                    <p class="keys">Parent ph </p><p class="vals">: <span class="vals"><%= info.parent_phone%></span></p>
+                    <p class="keys">Address </p><p class="vals">: <span class="vals"><%= info.address%></span></p>
+                    <p class="keys">Validity </p><p class="vals">: <span class="vals"><%= info.validity%></span>years</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div id="table-container">
+    <div id="table-container" class="dis-none">
         <div id="table">
             <!-- hr2 = header rowspan 2 -->
             <div class="header hr2">Subject code</div>
@@ -64,13 +76,6 @@
             <div class="header">Avg</div>
             <div class="header">1</div>
             <div class="header">Avg</div>
-            <% for(let i=0;i<32;i++){ %>
-                <div <% if(i<16==0) { %> class=<%="grid-item"%> <% } %>
-                >
-                
-                    <%=i%>
-                </div>
-            <% } %>
 
         </div>
     </div>
