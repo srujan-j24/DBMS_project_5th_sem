@@ -13,7 +13,8 @@ const pool = mysql.createPool({
     port: process.env.PORTNUM,       
     user: process.env.DBUSER,
     password: process.env.DBPASSWORD,    
-    database: process.env.DBNAME
+    database: process.env.DBNAME,
+    connectTimeout: 60000
 }).promise();
 
 app.use(express.static(path.join(__dirname, "/public/css")));
@@ -82,6 +83,8 @@ app.get("/staffdashboard", (req, res) => {
 app.post("/login", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
+    console.log(username);
+    console.log(password);
     // Regular expression to match exactly 8 digits
     let studentRegex = /^\d{8}$/;
     let staffRegex = /^S\d{3}$/;
