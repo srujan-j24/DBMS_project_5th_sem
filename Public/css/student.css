@@ -121,6 +121,7 @@ hr{
     display:flex;
     align-items: flex-start;
     padding: 2rem 2rem;
+    display: none;
 }
 #table{
     display: grid;
