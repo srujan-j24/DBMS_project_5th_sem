@@ -44,7 +44,7 @@ app.get("/", (req, res) => {
 });
 app.get("/student", async(req, res)=>{
     try{
-        if(req.cookies.student && req.cookies.student.ID =='20220002'){
+        if(req.cookies.student ){
             const [rows, fields] = await pool.query("SELECT * FROM student WHERE college_ID = ?", [req.cookies.student.ID]);
             res.render("studentinfo.ejs", { studentdb: rows[0] });
     }//content of cookie is present
