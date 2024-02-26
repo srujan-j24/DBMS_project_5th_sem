@@ -1,6 +1,11 @@
 *{
     font-family: "Inter",sans-serif;
 }
+:root {
+    --header-color: #ccc;
+    --table-display: none;
+    --personal-display: flex;
+}
 #navigation{
     background-color: white;
     height: 12%;
@@ -14,6 +19,8 @@
 body{
     height:100vh;
     margin:0;
+    display: flex;
+    flex-direction: column;
 }
 .sem-btn{
     
@@ -75,7 +82,7 @@ body{
 hr{
     margin: 0;
     place-self: center;
-    margin:0 3rem;
+    width: calc(100vw - 6rem);
     box-sizing: border-box;
 }
 #Info-grid{
@@ -117,11 +124,9 @@ hr{
 #table-container{
     background-color: white;
     gap: 1px;
-    height: 88%;
-    display:flex;
+    display: var(--table-display);
     align-items: flex-start;
     padding: 2rem 2rem;
-    display: none;
 }
 #table{
     display: grid;
@@ -153,11 +158,72 @@ hr{
     background-color: var(--header-color);
     transition-duration: 500ms;
 }
-
-:root {
-    --header-color: #ccc;
+.td{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    box-sizing: border-box;
 }
-     
-  
+
+
+
+#personal-info-cont{
+    display: var(--personal-display);
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    padding: 2rem;
+    box-sizing: border-box;
+    
+}
+
+#personal-info{
+    border-radius: 1rem;
+    background-color:aliceblue;
+    border: 1px solid gray;
+    height: 55%;
+    aspect-ratio: 2 / 1;
+    padding: 2rem 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+#personal-pic{
+    flex-grow: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#personal-pic > div{
+    width: 65%;
+    aspect-ratio: 1 / 1.3;
+    background-color: deepskyblue;
+}
+#personal-details{
+    flex-grow: 1.5;
+    display: flex;
+    flex-direction: column;
+}
+#personal-details > div{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    flex-grow: 1;
+    padding-top: 2rem; 
+
+}
+#personal-details > h2{
+    margin: 0;
+}
+#personal-details > div > p{
+    margin: 0;
+}
+.vals{
+    padding-left: 1rem;
+}
+
+.dis-none{
+    display: none;
+}
   
   

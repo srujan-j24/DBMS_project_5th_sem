@@ -43,7 +43,7 @@ app.get("/", (req, res) => {
 app.get("/student", async(req, res)=>{
 
     if(req.cookies.student ){
-            const [rows, fields] = await pool.query("SELECT * FROM personal_info WHERE college_ID = ?", [req.cookies.student.ID]);
+            const [rows, fields] = await pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)]);
             console.log(rows[0]);
             res.render("studentinfo.ejs", { info: rows[0] });
             
