@@ -3,8 +3,6 @@ const path = require("path");
 const bodyparser = require("body-parser")
 const cookie = require("cookie-parser")
 const port = "3000";
-
-
 const app = express();
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
@@ -43,19 +41,17 @@ app.get("/", (req, res) => {
 
 });
 app.get("/student", async(req, res)=>{
-    try{
-        if(req.cookies.student ){
-            const [rows, fields] = await pool.query("SELECT * FROM student WHERE college_ID = ?", [req.cookies.student.ID]);
-            res.render("studentinfo.ejs", { studentdb: rows[0] });
+
+    if(req.cookies.student ){
+            const [rows, fields] = await pool.query("SELECT * FROM personal_info WHERE college_ID = ?", [req.cookies.student.ID]);
+            console.log(rows[0]);
+            res.render("studentinfo.ejs", { info: rows[0] });
+            
     }//content of cookie is present
     else {
         res.render("login.ejs");
     }//content of cookie is not present or invalid
-    }
-    catch (error) {
-        console.error("Error fetching student data:", error);
-        res.status(500).send("Internal Server Error");
-    }
+    
 });
 
 app.get("/staffdashboard", (req, res) => {
@@ -87,16 +83,25 @@ app.post("/login", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
     // Regular expression to match exactly 8 digits
-    let usernameRegex = /^\d{8}$/;
-    let susernameRegex = /^S\d{3}$/;
+    let studentRegex = /^\d{8}$/;
+    let staffRegex = /^S\d{3}$/;
     // Check if the username matches the pattern
-    if (usernameRegex.test(username)) {
-        // If username is valid, set the student cookie and redirect
-            
-        res.cookie('student', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
-        res.status(200).send("/student");
+    if (studentRegex.test(username)) {
+        pool.query("SELECT count(*) as count from student where college_ID = ? and password = ?",[username,password])
+            .then((result)=>{
+                let count = result[0][0].count;
+                if(count == 1){
+                    console.log("Hi man")
+                    res.cookie('student', { ID: username }, { maxAge: 10 * 60 * 1000, httpOnly: true });
+                    res.status(200).send("/student");
+                }
+                else{
+                    res.status(400).send("Credential invalid username or password"); 
+                }
+                
+            })
     }
-    else if (susernameRegex.test(username)) {
+    else if (staffRegex.test(username)) {
         res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
         res.status(200).send("/staffdashboard");
     }
@@ -104,6 +109,7 @@ app.post("/login", (req, res) => {
         // If username is invalid, send an error response
         res.status(400).send("Invalid username");
     }
+    
 });
 
 
