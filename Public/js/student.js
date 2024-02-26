@@ -3,6 +3,7 @@ const personal_btn = document.getElementById("personal-btn");
 const root = document.documentElement;
 const personal_info_cont = document.getElementById("personal-info-cont");
 const table_cont = document.getElementById("table-container");
+const logout = document.getElementById("logout");
 
 buttons.forEach(button =>{
     button.addEventListener('click',()=> {
@@ -20,5 +21,12 @@ personal_btn.addEventListener("click", ()=>{
 })
 
 
-
+$('#logout').click(()=>{
+    $.ajax({type:"POST",url:"/logout",data:""})
+        .done((response)=>{
+            console.log(response)
+            window.location.href = response
+        })
+        
+});
   

@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS staff(
     is_hod boolean,
     is_admin boolean,
     password varchar(30),
-    branch_ID varchar(10),
+  ''  branch_ID varchar(10),
     logged_in boolean,
     foreign key(branch_ID) references branch(ID) ON DELETE CASCADE 
 );
