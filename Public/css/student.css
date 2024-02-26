@@ -198,7 +198,8 @@ hr{
 #personal-pic > div{
     width: 65%;
     aspect-ratio: 1 / 1.3;
-    background-color: deepskyblue;
+    background: rgb(255,255,255);
+    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(3,170,255,1) 100%);
 }
 #personal-details{
     flex-grow: 1.5;
