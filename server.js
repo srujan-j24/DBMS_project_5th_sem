@@ -30,121 +30,101 @@ app.listen(port, () => {
 });
 
 app.get("/", (req, res) => {
-    if (req.cookies.student) {
-        res.redirect("/student")
-    }
-    else if(req.cookies.staff){
-        res.redirect("/staff")
-    }
-    else {
+    if (req.cookies.student)
+        res.redirect("/student");
+    else if(req.cookies.staff)
+        res.redirect("/staff");
+    else
         res.render("login.ejs");
-    }
-
 });
+
+
 app.get("/student", (req, res)=>{
 
-    if(req.cookies.student ){
-            pool.query("SELECT logged_in from student where college_ID=?",[Number(req.cookies.student.ID)])
-                .then(async(result)=>{
-                    if(result[0][0].logged_in==0){
-                        res.render("login.ejs")
-                    }
-                    else{
-                        const [rows, fields] = await pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)]);
-                        console.log(rows[0]);
-                        res.render("studentinfo.ejs", { info: rows[0] });
-                    }
-                })
-            
-            
-    }//content of cookie is present
-    else {
+    if( !req.cookies.student ){//student cookie is not present;
         res.render("login.ejs");
-    }//content of cookie is not present or invalid
+    }
+    else {//student cookie is present
+        pool.query("SELECT logged_in from student where college_ID=?",[Number(req.cookies.student.ID)])
+            .then((result)=>{
+                if(result[0][0].logged_in == 0){//cookie present but logged_in is false(logged out)
+                    res.render("login.ejs");
+                }
+                else{
+                    pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)])
+                        .then((retrivedData)=>{
+                            res.render("studentinfo.ejs", { info: retrivedData[0] });
+                        });
+                }
+            });
+    }
     
 });
 
+
 app.get("/staff", (req, res) => {
-    console.log("recieved")
-    if (req.cookies.staff) {
+    if( !req.cookies.staff ) {//staff cookie is not present
+        res.render("login.ejs");
+    }
+    else{//staff cookie is present
         pool.query("SELECT logged_in from staff where ID=?",[req.cookies.staff.ID])
         .then((result) =>{
-            // console.log(result);
-            if(result[0][0].logged_in==0){
+            if(result[0][0].logged_in == 0){//staff cookie is present but logged_in is false (logged out)
                 res.render('login.ejs');
             }
             else{
-                res.render('staffdashboard.ejs')
+                res.render('staffdashboard.ejs');
             }
         })
-
-    }//content of cookie is present
-    else {
-        res.render("login.ejs");
     }
 });
-// app.post("/login",(req,res)=>{
-//    // console.log(req.body)
-//    let username = req.body.username;
-//    let password = req.body.password;
-//    //console.log(username);
-//    //console.log(password);
-//    //console.log(req.body);
-// //    if(username == "admin"&& password == "admin")
-//    if (req.cookies.student && /^\d{8}$/.test(req.cookies.student)){
-//         res.cookie('student',{ID:'20210001'},{maxAge:1*60*1000,httpOnly:true})
-//         res.status(200).send("/student")
-//    }
-//    else{
-//     res.status(400).send("Both invalid")
-//    }
-// })
+
 
 app.post("/login", (req, res) => {
     let username = req.body.username;
     let password = req.body.password;
-    console.log(username);
-    console.log(password);
-    // Regular expression to match exactly 8 digits
-    let studentRegex = /^\d{8}$/;
-    let staffRegex = /^ST_\d{4}$/;
-    // Check if the username matches the pattern
+    
+    let studentRegex = /^\d{8}$/;   // Regex to match 8 digits(college_ID pattern)
+    let staffRegex = /^ST_\d{4}$/;  // Regex to match 
+    
     if (studentRegex.test(username)) {
         pool.query("SELECT count(*) as count from student where college_ID = ? and password = ?",[username,password])
             .then((result)=>{
                 let count = result[0][0].count;
                 if(count == 1){
-                    console.log("Hi man")
                     pool.query("UPDATE student set logged_in=1 where college_ID=?",[username]);
                     res.cookie('student', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/student");
                 }
                 else{
-                    res.status(400).send("Credential invalid username or password"); 
+                    res.status(400).send("Invalid Credentials"); 
                 }
-                
             })
             .catch((error)=>{
                 console.log(error);
-            })
+            });
     }
     else if (staffRegex.test(username)) {
         pool.query("SELECT count(*) as count from staff where ID = ? and password = ?", [username, password])
-        .then((result)=>{
-            let count = result[0][0].count;
-            if(count == 1){
-                console.log("Hi man")
-                pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
-                res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
-                res.status(200).send("/staff");
-            }
-            else {
-                // If username is invalid, send an error response
-                res.status(400).send("Invalid username");
-             }
-               
-});
+            .then((result)=>{
+                let count = result[0][0].count;
+                if(count == 1){
+                    pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
+                    res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
+                    res.status(200).send("/staff");
+                }
+                else {
+                    res.status(400).send("Invalid Credentials");
+                }
+            })
+            .catch((error)=>{
+                console.log(error);
+            });
     }
+    else{
+        res.status(400).send("Invalid username");
+    }
+})
     
 
 app.post("/logout",(req,res)=>{
@@ -152,18 +132,16 @@ app.post("/logout",(req,res)=>{
         pool.query("UPDATE student set logged_in=0 where college_ID=?",[Number(req.cookies.student.ID)])
             .then((result)=>{
                 res.status(200).send("/");
-            })
+            });
         
     }
     else if(req.cookies.staff){
-        console.log(req.cookies.ID);
         pool.query("UPDATE staff set logged_in=0 where ID=?",[req.cookies.staff.ID])
-        .then((result) =>{
-            res.status(200).send("/");
-        })
+            .then((result) =>{
+                res.status(200).send("/");
+            });
     }
-    
-    
-})
-    
-})
+    else{
+        res.status(400).status("Bad request");
+    }
+});
