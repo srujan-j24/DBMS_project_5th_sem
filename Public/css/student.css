@@ -47,7 +47,7 @@ body{
     
     aspect-ratio: 3.5 / 1;
     border-radius: 2rem;
-    background-color: peachpuff;
+    background-color: #ffdab9;
 }
 #nav-btns-cont{
     flex-grow: 1;
@@ -94,9 +94,7 @@ hr{
     grid-auto-rows: 2rem;
     gap: 0.5rem;
 }
-.grid-items{
-    background-color: cadetblue;
-}
+
 #btn1{
     background-color: #A5FCCC;
 }
@@ -184,10 +182,11 @@ hr{
     border: 1px solid gray;
     height: 55%;
     aspect-ratio: 2 / 1;
-    padding: 2rem 1rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    
 }
 #personal-info-cont > h2{
     text-align: center;
@@ -197,10 +196,29 @@ hr{
     flex-grow: 1;
     display: grid;
     grid-template-columns: 1fr 2fr;
+    place-items: center;
 }
-
+#personal-img{
+    height: 90%;
+    width: 90%;
+    background: rgb(255,218,185);
+    background: linear-gradient(90deg, rgba(255,218,185,1) 0%, rgba(245,173,124,1) 50%, rgba(227,163,182,1) 100%);
+}
 #personal-details{
-    
+    display: grid;
+    height: 90%;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+}
+.keys, .vals{
+    margin: 0;
+    font-size: 1.2rem;
+}
+.keys{
+    font-weight: 600;
+}
+.vals > span{
+    padding-left: 1rem;
 }
 
   

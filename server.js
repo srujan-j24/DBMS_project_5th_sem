@@ -53,7 +53,7 @@ app.get("/student", (req, res)=>{
                 else{
                     pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)])
                         .then((retrivedData)=>{
-                            res.render("studentinfo.ejs", { info: retrivedData[0] });
+                            res.render("studentinfo.ejs", { info: retrivedData[0][0] });
                         });
                 }
             });
@@ -93,7 +93,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE student set logged_in=1 where college_ID=?",[username]);
-                    res.cookie('student', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
+                    res.cookie('student', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/student");
                 }
                 else{
@@ -110,7 +110,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
-                    res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
+                    res.cookie('staff', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/staff");
                 }
                 else {
