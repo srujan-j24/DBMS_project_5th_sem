@@ -9,11 +9,11 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = mysql.createPool({
-    host:'localhost',
-    port: '3300',       
-    user: 'root',
-    password: 'Sam@2003',    
-    database: 'studentdb',
+    host: 'localhost',
+    port: process.env.PORTNUM,       
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,   
+    database: process.env.DBNAME,
     
 }).promise();
 
@@ -34,7 +34,7 @@ app.get("/", (req, res) => {
         res.redirect("/student")
     }
     else if(req.cookies.staff){
-        res.redirect("/staffdashboard")
+        res.redirect("/staff")
     }
     else {
         res.render("login.ejs");
@@ -64,9 +64,20 @@ app.get("/student", (req, res)=>{
     
 });
 
-app.get("/staffdashboard", (req, res) => {
-    if (req.cookies.staff && req.cookies.staff.ID == 'S001') {
-        res.render("staffdashboard.ejs");
+app.get("/staff", (req, res) => {
+    console.log("recieved")
+    if (req.cookies.staff) {
+        pool.query("SELECT logged_in from staff where ID=?",[req.cookies.staff.ID])
+        .then((result) =>{
+            // console.log(result);
+            if(result[0][0].logged_in==0){
+                res.render('login.ejs');
+            }
+            else{
+                res.render('staffdashboard.ejs')
+            }
+        })
+
     }//content of cookie is present
     else {
         res.render("login.ejs");
@@ -96,7 +107,7 @@ app.post("/login", (req, res) => {
     console.log(password);
     // Regular expression to match exactly 8 digits
     let studentRegex = /^\d{8}$/;
-    let staffRegex = /^S\d{3}$/;
+    let staffRegex = /^ST_\d{4}$/;
     // Check if the username matches the pattern
     if (studentRegex.test(username)) {
         pool.query("SELECT count(*) as count from student where college_ID = ? and password = ?",[username,password])
@@ -118,17 +129,41 @@ app.post("/login", (req, res) => {
             })
     }
     else if (staffRegex.test(username)) {
-        res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
-        res.status(200).send("/staffdashboard");
-    }
-    else {
-        // If username is invalid, send an error response
-        res.status(400).send("Invalid username");
+        pool.query("SELECT count(*) as count from staff where ID = ? and password = ?", [username, password])
+        .then((result)=>{
+            let count = result[0][0].count;
+            if(count == 1){
+                console.log("Hi man")
+                pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
+                res.cookie('staff', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
+                res.status(200).send("/staff");
+            }
+            else {
+                // If username is invalid, send an error response
+                res.status(400).send("Invalid username");
+             }
+               
+});
     }
     
-});
 
 app.post("/logout",(req,res)=>{
-    pool.query("UPDATE student set logged_in=0 where college_ID=?",[Number(req.cookies.student.ID)]);
-    res.status(200).send("/");
+    if (req.cookies.student){
+        pool.query("UPDATE student set logged_in=0 where college_ID=?",[Number(req.cookies.student.ID)])
+            .then((result)=>{
+                res.status(200).send("/");
+            })
+        
+    }
+    else if(req.cookies.staff){
+        console.log(req.cookies.ID);
+        pool.query("UPDATE staff set logged_in=0 where ID=?",[req.cookies.staff.ID])
+        .then((result) =>{
+            res.status(200).send("/");
+        })
+    }
+    
+    
+})
+    
 })
