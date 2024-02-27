@@ -9,12 +9,12 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const pool = mysql.createPool({
-    host: process.env.HOSTNAME,
-    port: process.env.PORTNUM,       
-    user: process.env.DBUSER,
-    password: process.env.DBPASSWORD,    
-    database: process.env.DBNAME,
-    connectTimeout: 60000
+    host:'localhost',
+    port: '3300',       
+    user: 'root',
+    password: 'Sam@2003',    
+    database: 'studentdb',
+    
 }).promise();
 
 app.use(express.static(path.join(__dirname, "/public/css")));
@@ -41,12 +41,21 @@ app.get("/", (req, res) => {
     }
 
 });
-app.get("/student", async(req, res)=>{
+app.get("/student", (req, res)=>{
 
     if(req.cookies.student ){
-            const [rows, fields] = await pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)]);
-            console.log(rows[0]);
-            res.render("studentinfo.ejs", { info: rows[0] });
+            pool.query("SELECT logged_in from student where college_ID=?",[Number(req.cookies.student.ID)])
+                .then(async(result)=>{
+                    if(result[0][0].logged_in==0){
+                        res.render("login.ejs")
+                    }
+                    else{
+                        const [rows, fields] = await pool.query("SELECT p.*, date_format(DOB, '%d-%m-%Y') as dob, s.name FROM personal_info p, student s WHERE p.college_ID = ? and s.college_ID = ?", [Number(req.cookies.student.ID), Number(req.cookies.student.ID)]);
+                        console.log(rows[0]);
+                        res.render("studentinfo.ejs", { info: rows[0] });
+                    }
+                })
+            
             
     }//content of cookie is present
     else {
@@ -95,13 +104,17 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     console.log("Hi man")
-                    res.cookie('student', { ID: username }, { maxAge: 10 * 60 * 1000, httpOnly: true });
+                    pool.query("UPDATE student set logged_in=1 where college_ID=?",[username]);
+                    res.cookie('student', { ID: username }, { maxAge: 1 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/student");
                 }
                 else{
                     res.status(400).send("Credential invalid username or password"); 
                 }
                 
+            })
+            .catch((error)=>{
+                console.log(error);
             })
     }
     else if (staffRegex.test(username)) {
@@ -115,4 +128,7 @@ app.post("/login", (req, res) => {
     
 });
 
-
+app.post("/logout",(req,res)=>{
+    pool.query("UPDATE student set logged_in=0 where college_ID=?",[Number(req.cookies.student.ID)]);
+    res.status(200).send("/");
+})
