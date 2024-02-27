@@ -168,7 +168,7 @@ hr{
 
 
 
-#personal-info-cont{
+#personal-info-wrapper{
     display: var(--personal-display);
     justify-content: center;
     align-items: center;
@@ -178,7 +178,7 @@ hr{
     
 }
 
-#personal-info{
+#personal-info-cont{
     border-radius: 1rem;
     background-color:aliceblue;
     border: 1px solid gray;
@@ -186,45 +186,22 @@ hr{
     aspect-ratio: 2 / 1;
     padding: 2rem 1rem;
     display: flex;
+    flex-direction: column;
     gap: 0.5rem;
 }
-
-#personal-pic{
-    flex-grow: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#personal-info-cont > h2{
+    text-align: center;
+    margin: 0;
 }
-#personal-pic > div{
-    width: 65%;
-    aspect-ratio: 1 / 1.3;
-    background: rgb(255,255,255);
-    background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(3,170,255,1) 100%);
-}
-#personal-details{
-    flex-grow: 1.5;
-    display: flex;
-    flex-direction: column;
-}
-#personal-details > div{
-    display: grid;
-    grid-template-columns: auto 1fr;
+#personal-info-inner{
     flex-grow: 1;
-    padding-top: 2rem; 
-
-}
-#personal-details > h2{
-    margin: 0;
-}
-#personal-details > div > p{
-    margin: 0;
-}
-.vals{
-    padding-left: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }
 
-.dis-none{
-    display: none;
+#personal-details{
+    
 }
+
   
   
