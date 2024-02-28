@@ -5,11 +5,13 @@ body {
   margin: 0px;
   width: 100vw;
   height: 100vh;
+  
 }
 h1 {
   color: white;
   margin: 0;
   font-family: "Inknut Antiqua",serif;
+  text-shadow: 0 0 20px #000000, 0 0 40px #0327f5;
 }
 .grid-container {
   display: grid;
@@ -47,10 +49,12 @@ form {
   gap: 2.5rem;
   border-radius: 0.5rem;
   border: 1px solid black;
+  cursor: wait;
 }
 input {
   width: 18rem;
   font-size: larger;
+  
 }
 input:focus{
   outline: none;
@@ -66,6 +70,7 @@ button {
   width: 18rem;
   padding: 1rem 0.5rem;
   font-size: larger;
+  cursor: wait;
 }
 
 button[type="submit"] {
