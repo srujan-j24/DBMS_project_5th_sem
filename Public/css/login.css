@@ -73,7 +73,6 @@ button {
   width: 18rem;
   padding: 1rem 0.5rem;
   font-size: larger;
-  cursor: wait;
 }
 
 button[type="submit"] {
