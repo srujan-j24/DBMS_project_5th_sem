@@ -98,6 +98,7 @@ app.post("/login", (req, res) => {
     let staffRegex = /^ST_\d{4}$/;  // Regex to match 
     
     if (studentRegex.test(username)) {
+        console.log("student");
         pool.query("SELECT count(*) as count from student where college_ID = ? and password = ?",[username,password])
             .then((result)=>{
                 let count = result[0][0].count;
@@ -115,6 +116,7 @@ app.post("/login", (req, res) => {
             });
     }
     else if (staffRegex.test(username)) {
+        console.log("username");
         pool.query("SELECT count(*) as count from staff where ID = ? and password = ?", [username, password])
             .then((result)=>{
                 let count = result[0][0].count;
@@ -132,6 +134,7 @@ app.post("/login", (req, res) => {
             });
     }
     else{
+        console.log("Hi")
         res.status(400).send("Invalid username");
     }
 })
