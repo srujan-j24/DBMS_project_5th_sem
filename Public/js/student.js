@@ -5,7 +5,7 @@ const personal_info_cont = document.getElementById("personal-info-cont");
 const table_cont = document.getElementById("table-container");
 const logout = document.getElementById("logout");
 
-buttons.forEach(button =>{
+buttons.forEach((button,index) =>{
     button.addEventListener('click',()=> {
         const targetColor = window.getComputedStyle(button).backgroundColor;
         root.style.setProperty('--header-color', targetColor);
@@ -29,4 +29,20 @@ $('#logout').click(()=>{
         })
         
 });
+
+
+buttons.forEach((button,index)=>{
+    index=index+1;
+    console.log("hi")
+    button.addEventListener("click",()=>{
+        $.ajax({type:"POST",url:"/sem",data:{sem:index}})
+        .done((response)=>{
+            console.log("Success")
+        })
+        .fail((response)=>{
+            console.log("error")
+        })
+    })
+   
+})
   
