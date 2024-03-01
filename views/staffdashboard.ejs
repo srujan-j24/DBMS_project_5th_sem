@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@300;400;500;600;700;800;900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/staff.css">
     <title>Staff</title>
 </head>
@@ -14,15 +17,17 @@
     <hr>
     <div>
         <div class="gridcontainer">
+            <% for(let i = 0; i <=10; i++){ %>
             <div class="griditem">
+                <p id="class"> Class A</p>
                 <p id="subcode">21CS51</p>
                 <p id="sub">Automata theory</p>
-                <p id="class"> Class A</p>
-
+                <div>
+                    <button class="item-btns"><img src="/edit.svg" alt=""></button>
+                    <button class="item-btns"><img src="/view.svg" alt=""></button>
+                </div>
             </div>
-            <div class="griditem"></div>
-            <div class="griditem"></div>
-            <div class="griditem"></div>
+            <% } %>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

@@ -11,7 +11,7 @@ h1 {
   color: white;
   margin: 0;
   font-family: "Inknut Antiqua",serif;
-  text-shadow: 0 0 20px #000000, 0 0 40px #0327f5;
+  text-shadow: 2px 2px 10px #8d02f7, -2px -2px 10px #b82e2e;
 }
 .grid-container {
   display: grid;
@@ -49,6 +49,9 @@ form {
   gap: 2.5rem;
   border-radius: 0.5rem;
   border: 1px solid black;
+  
+}
+.cursor-wait{
   cursor: wait;
 }
 input {
