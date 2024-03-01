@@ -86,6 +86,9 @@ app.get("/staff", (req, res) => {
     }
 });
 
+app.get("/class", (req,res) =>{
+    res.render("class.ejs");
+})
 
 app.post("/login", (req, res) => {
     let username = req.body.username;
@@ -95,6 +98,7 @@ app.post("/login", (req, res) => {
     let staffRegex = /^ST_\d{4}$/;  // Regex to match 
     
     if (studentRegex.test(username)) {
+        console.log("student");
         pool.query("SELECT count(*) as count from student where college_ID = ? and password = ?",[username,password])
             .then((result)=>{
                 let count = result[0][0].count;
@@ -112,6 +116,7 @@ app.post("/login", (req, res) => {
             });
     }
     else if (staffRegex.test(username)) {
+        console.log("username");
         pool.query("SELECT count(*) as count from staff where ID = ? and password = ?", [username, password])
             .then((result)=>{
                 let count = result[0][0].count;
@@ -129,6 +134,7 @@ app.post("/login", (req, res) => {
             });
     }
     else{
+        console.log("Hi")
         res.status(400).send("Invalid username");
     }
 })
@@ -152,3 +158,47 @@ app.post("/logout",(req,res)=>{
         res.status(400).status("Bad request");
     }
 });
+async function getAcademicInfo(res){
+    //let sem = `sem${semnum}`
+    //pool.query("SELECT * from marks where college_ID='20210001' ")
+        // .then((result)=>{
+            // console.log(result)
+        //let res=result[0][0].sem1;
+        //console.log(res);
+        let AssignmentavgAry = []
+        for(i=0;i<res.ssem.A1.length;i++){
+            const Asum=res.ssem.A1[i]+res.ssem.A2[i];
+            const Avg=Math.ceil(Asum/2);
+            AssignmentavgAry.push(Avg);   
+        }
+        console.log(AssignmentavgAry)
+        let IAavgAry = []
+        for(i=0;i<res.ssem.IA1.length;i++){
+            const IAsum=res.ssem.IA1[i]+res.ssem.IA2[i]+res.ssem.IA3[i];
+            const avg=Math.ceil(IAsum/3);
+            IAavgAry.push(avg)
+        }
+        console.log(IAavgAry)
+        let QuizavgAry = []
+        for(i=0;i<res.ssem.Q1.length;i++){
+            const quiz=res.ssem.Q1[i];
+            QuizavgAry.push(quiz)
+        }
+        console.log(QuizavgAry)
+    // })
+}
+
+//getAcademicInfo();
+
+app.post("/sem",async(req,res)=>{
+    //console.log('hi');
+    let sem= req.body.sem;
+    sem= `sem${sem}`
+    let college_ID=Number(req.cookies.student.ID)
+    pool.query("select m.?? as ssem,s.?? as msem from student st,marks m,scheme s where st.college_ID=? and st.college_ID=m.college_ID and m.scheme_ID=s.ID and st.branch_ID=s.branch_ID;",[sem,sem,college_ID])
+        .then((result)=>{
+            result = result[0][0];
+            console.log(result)
+            getAcademicInfo(result)
+        })
+})
