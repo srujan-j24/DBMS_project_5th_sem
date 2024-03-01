@@ -17,11 +17,13 @@
     <hr>
     <div>
         <div class="gridcontainer">
-            <% for(let i = 0; i <=10; i++){ %>
+            <% for(let i = 0; i <cards.length; i++){ %>
             <div class="griditem">
-                <p id="class"> Class A</p>
-                <p id="subcode">21CS51</p>
-                <p id="sub">Automata theory</p>
+                <div>
+                    <p id="class">SubCode :</p><p id="class"> <%=cards[i][1] %></p>
+                </div>
+                <div>
+                     <p id="subcode">Class :</p> <p id="subcode"><%= cards[i][0] %></p></div>
                 <div>
                     <button class="item-btns"><img src="/edit.svg" alt=""></button>
                     <button class="item-btns"><img src="/view.svg" alt=""></button>
