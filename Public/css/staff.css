@@ -4,7 +4,7 @@
 body{
     margin: 0;
     height: 100vh;
-    background-color: rgba(220, 238, 194, 0.267);
+    background-color: rgb(255, 253, 254);
 }
 nav{
     height: 10vh;
@@ -53,18 +53,20 @@ hr{
 .griditem{
     height: 15rem;
     background-color: rgb(230, 230, 250); 
-    border-radius:1rem ;
+    border-radius:1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     padding-inline: 1rem;
-    gap:1rem;
+    gap:1.5rem;
     box-sizing: border-box;
-}
-/* .griditem > * {
-    text-align: center;
+    box-shadow:5px 5px 5px rgba(0, 0, 0, 0.1); ;
 
-} */
+}
+ .griditem > * {
+    
+} 
 .griditem > div{
     display: flex;
     justify-content: flex-end;
@@ -94,5 +96,5 @@ hr{
     font-size: 2rem;
 }
 #class{
-    font-size: 1.5rem;
+    font-size: 1.7rem;
 }

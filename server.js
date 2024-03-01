@@ -6,6 +6,7 @@ const port = "3000";
 const app = express();
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
+const { access } = require("fs");
 dotenv.config();
 
 const pool = mysql.createPool({
@@ -73,7 +74,13 @@ app.get("/staff", (req, res) => {
                 res.render('login.ejs');
             }
             else{
-                res.render('staffdashboard.ejs');
+                pool.query("SELECT access_data from staff where ID=?",[req.cookies.staff.ID])
+                .then((result)=>{
+                    let access_data=(result[0][0].access_data.access_data);
+                    console.log(access_data);
+                    res.render('staffdashboard.ejs', {cards: access_data});
+                })
+                
             }
         })
     }
