@@ -79,6 +79,9 @@ app.get("/staff", (req, res) => {
     }
 });
 
+app.get("/class", (req,res) =>{
+    res.render("class.ejs");
+})
 
 app.post("/login", (req, res) => {
     let username = req.body.username;
