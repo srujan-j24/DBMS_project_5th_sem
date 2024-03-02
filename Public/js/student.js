@@ -21,7 +21,7 @@ function append_data(data_array) {
     }
     let table = document.getElementById("table");
     for(i=0;i<data_array.length;i++) {
-        let {as1,as2,college_ID,credits,ia1,ia2,ia3,name,q1,sub_code} = data_array[i]
+        let {as1,as2,credits,ia1,ia2,ia3,name,q1,sub_code} = data_array[i]
         table.appendChild(create_data_div(sub_code,name));
         table.appendChild(create_data_div(credits));
         table.appendChild(create_data_div(" "));
