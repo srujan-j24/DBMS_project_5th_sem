@@ -6,6 +6,19 @@ const table_cont = document.getElementById("table-container");
 const logout = document.getElementById("logout");
 
 function append_data(data_array) {
+    let i;
+    function create_data_div(data,additional_attribute){
+        let new_div = document.createElement("div");
+        new_div.classList.add("td");
+        new_div.innerText = data;
+        if(i % 2 != 0){
+            new_div.classList.add("light-grey")
+        }
+        if(additional_attribute) {
+            new_div.setAttribute("data",additional_attribute);
+        }
+        return new_div;
+    }
     let table = document.getElementById("table");
     for(i=0;i<data_array.length;i++) {
         let {as1,as2,college_ID,credits,ia1,ia2,ia3,name,q1,sub_code} = data_array[i]
@@ -40,15 +53,7 @@ function append_data(data_array) {
     }
 }
 
-function create_data_div(data,additional_attribute){
-    let new_div = document.createElement("div");
-    new_div.classList.add("td");
-    new_div.innerText = data;
-    if(additional_attribute) {
-        new_div.setAttribute("data",additional_attribute);
-    }
-    return new_div;
-}
+
 
 
 

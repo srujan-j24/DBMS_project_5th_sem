@@ -164,8 +164,8 @@ hr{
     box-sizing: border-box;
 }
 
-.td:nth-of-type(15n) {
-    background-color: #cccccc5d;
+.light-grey{
+    background-color: rgba(128, 128, 128, 0.182);
 }
 
 #personal-info-wrapper{
