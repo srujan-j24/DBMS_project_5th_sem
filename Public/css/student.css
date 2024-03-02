@@ -3,6 +3,7 @@
 }
 :root {
     --header-color: #ccc;
+    --header-color-light:#ccc;
     --table-display: none;
     --personal-display: flex;
 }
@@ -165,7 +166,7 @@ hr{
 }
 
 .light-grey{
-    background-color: rgba(128, 128, 128, 0.182);
+    background-color: var(--header-color-light);
 }
 
 #personal-info-wrapper{
