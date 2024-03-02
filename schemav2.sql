@@ -29,6 +29,7 @@ CREATE TABLE IF NOT EXISTS subjects(
     name varchar(70),
     credits int,
     sem_ID int,
+
     foreign key(scheme_ID) references scheme(id) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sem_ID) references sem(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -71,12 +72,12 @@ CREATE TABLE IF NOT EXISTS personal_info(
 CREATE TABLE IF NOT EXISTS marks(
     college_ID int, 
     sub_code varchar(10),
-    ia1 float,
-    ia2 float,
-    ia3 float,
-    as1 float,
-    as2 float,
-    q1 float,
+    ia1 float default -1,
+    ia2 float default -1,
+    ia3 float default -1,
+    as1 float default -1,
+    as2 float default -1,
+    q1 float default -1,
     primary key(college_ID, sub_code),
     foreign key(college_ID) references student(college_ID) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sub_code) references subjects(sub_code)  ON DELETE CASCADE ON UPDATE CASCADE
