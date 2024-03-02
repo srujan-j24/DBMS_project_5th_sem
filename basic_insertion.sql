@@ -10,7 +10,7 @@ insert into branch values("CSE","Computer science and engineering"),
 insert into sem values(1),(2),(3),(4),(5),(6),(7),(8);
 
 insert into scheme values("2021_CSE",2021,"CSE"),
-                        ("2021_ISE",2021,"ISE"),
+                        ("2021_ISE",2021,"ISE");
 
 insert into class values("CSE_1_A",1,'A',"CSE"),
                         ("CSE_1_B",1,'B',"CSE");
