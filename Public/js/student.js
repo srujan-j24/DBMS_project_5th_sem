@@ -90,6 +90,7 @@ buttons.forEach((button,index)=>{
     console.log("hi")
     button.addEventListener("click",()=>{
         let del_array = document.getElementsByClassName("td")
+        del_array = Array.from(del_array)
             for(let i=0;i<del_array.length;i++) {
                 del_array[i].remove();
 
