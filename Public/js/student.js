@@ -59,12 +59,7 @@ function append_data(data_array) {
 
 buttons.forEach((button,index) =>{
     button.addEventListener('click',()=> {
-        const targetColor = window.getComputedStyle(button).backgroundColor;
-        root.style.setProperty('--header-color', targetColor);
-        let light_color = (targetColor.replace(")",", 0.15)")).replace("b","ba");
-        root.style.setProperty('--header-color-light',light_color);
-        root.style.setProperty('--table-display', 'flex');
-        root.style.setProperty('--personal-display', 'none');
+        
         
     });
 });
@@ -98,7 +93,12 @@ buttons.forEach((button,index)=>{
             console.log(del_array)
         $.ajax({type:"POST",url:"/sem",data:{sem:index}})
         .done((response)=>{
-            
+            const targetColor = window.getComputedStyle(button).backgroundColor;
+            root.style.setProperty('--header-color', targetColor);
+            let light_color = (targetColor.replace(")",", 0.15)")).replace("b","ba");
+            root.style.setProperty('--header-color-light',light_color);
+            root.style.setProperty('--table-display', 'flex');
+            root.style.setProperty('--personal-display', 'none');
             append_data(response)
 
         })
