@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS branch(
 
 CREATE TABLE IF NOT EXISTS batch(
     id int primary key
+
 );
 
 CREATE TABLE IF NOT EXISTS sem(

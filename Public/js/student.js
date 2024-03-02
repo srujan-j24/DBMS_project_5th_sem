@@ -37,7 +37,7 @@ buttons.forEach((button,index)=>{
     button.addEventListener("click",()=>{
         $.ajax({type:"POST",url:"/sem",data:{sem:index}})
         .done((response)=>{
-            console.log("Success")
+            console.log(response)
         })
         .fail((response)=>{
             console.log("error")
