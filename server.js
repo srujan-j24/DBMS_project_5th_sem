@@ -62,7 +62,6 @@ app.get("/student", (req, res)=>{
     
 });
 
-
 app.get("/staff", (req, res) => {
     if( !req.cookies.staff ) {//staff cookie is not present
         res.render("login.ejs");
@@ -90,13 +89,37 @@ app.get("/staff", (req, res) => {
 app.get("/class/:class_ID/:sub_code/view", (req,res) =>{
     console.log(req.params.class_ID)
     if(req.cookies.staff) {
-        res.render("class.ejs")
+        let staff_id = req.cookies.staff.ID; 
+        let class_ID = req.params.class_ID;
+        let sub_code = req.params.sub_code;
+        pool.query("select count(*) as count from staff_access where staff_id = ? and class_ID = ? and sub_code = ?",[staff_id,class_ID,sub_code] )
+            .then((result)=>{
+                if(result[0][0].count == 1){
+                    pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
+                        .then((result)=>{
+                            console.log(result[0]);
+                            res.render("class.ejs",{data:result[0]});
+                        })
+                    }
+                else{
+                    res.status(400).send("Invalid request");
+                }
+            })     
     }
     else {
         res.render("login.ejs");
-    }
-    
+    }  
 })
+
+app.get("/class/:class_ID/:sub_code/edit", (req,res) =>{
+    console.log(req.params.class_ID)
+    if(req.cookies.staff) {
+        let staff_id = req.cookies.staff.ID; 
+        let class_ID = req.params.class_ID;
+        let sub_code = req.params.sub_code;
+    }
+})
+
 
 app.post("/login", (req, res) => {
     let username = req.body.username;

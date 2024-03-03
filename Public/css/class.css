@@ -75,17 +75,6 @@ hr{
     width: calc(100vw - 6rem);
     box-sizing: border-box;
 }
-#Info-grid{
-    display: grid;
-    background-color: bisque;
-    height:80%;
-    flex-grow: 1;
-    grid-template-columns: repeat(15,auto);
-    grid-auto-rows: 2rem;
-    gap: 0.5rem;
-}
-
-
 #table-container1{
     background-color: white;
     gap: 1px;
@@ -95,7 +84,7 @@ hr{
 #table1{
     display: grid;
     flex-grow: 1;
-    grid-template-columns:20vw repeat(10,1fr);  
+    grid-template-columns:20vw repeat(9,1fr);  
     grid-auto-rows: 2.5rem;
     gap: 1px;
 }
