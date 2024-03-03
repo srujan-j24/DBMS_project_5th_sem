@@ -251,6 +251,6 @@ app.post("/sem",async(req,res)=>{
         })
 })
 
-app.post("/class/:class_id/:sub_code",async (req,res)=>{
+app.post("/class/:class_id/:sub_code/edit",async (req,res)=>{
     console.log(req.body);
 })

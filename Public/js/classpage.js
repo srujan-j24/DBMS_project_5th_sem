@@ -2,30 +2,29 @@
 let save_btn=document.getElementById("edit-btn");
 
 save_btn.addEventListener("click",()=>{
-    let data=document.getElementsByClassName("td");
-    data= Array.from(data);
-    console.log(data);
-    let data_values=data.map((element)=>{
-        if (element.hasAttribute("data")){
-            return parseInt(element.getAttribute("data"))
-        }
-        else {
-            if (/^-?\d*\.?\d+$/.test(element.innerText)){
-
-                return parseFloat(element.innerText)
+    let no_values = document.getElementById("table1").getAttribute("len");
+    console.log(no_values);
+    let data_values = [];
+    try{
+        for(let i = 1; i <= no_values; i++){
+            let val = {
+                college_ID : parseInt(document.getElementById(`name${i}`).innerText),
+                aij: parseFloat(document.getElementById(`ia1${i}`).innerText),
+                ai2: parseFloat(document.getElementById(`ia2${i}`).innerText),
+                ai3: parseFloat(document.getElementById(`ia3${i}`).innerText),
+                as1: parseFloat(document.getElementById(`as1${i}`).innerText),
+                as2: parseFloat(document.getElementById(`as2${i}`).innerText),
+                q1: parseFloat(document.getElementById(`q${i}`).innerText)
             }
-            else{
-                return element.innerText
-            }
+            data_values.push(val);
         }
-    })
-    console.log(data_values);
-    let class_ID=document.getElementById("logo-txt").getAttribute("class-ID");
-    let sub_code=document.getElementById("logo-txt").getAttribute("sub-code");
-
-    $.ajax({type:"POST",url:`/class/${class_ID}/${sub_code}`,data:{updatedvalues:data_values}})
-        .done((response)=>{
-            console.log(response);
+    }catch(err){
+        alert("some values are invalid. Please recheck.");
+        return;
+    }
+    $.ajax({type:"POST",url:`/class/${class_ID}/${sub_code}/edit`,data:{updatedvalues:data_values}})
+    .done((response)=>{
+        console.log(response);
     
-        })
+    })
 })

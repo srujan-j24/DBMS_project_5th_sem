@@ -30,7 +30,7 @@
         <hr>
         <div></div>
     <div id="table-container1">
-        <div id="table1">
+        <div id="table1" len="<%= data.length %>">
             <div class="header hr21">Name</div>
             <div class="header hr21">Attendance</div>
             <div class="header hc41">Unit Tests</div>
@@ -46,16 +46,16 @@
             
         
             <% for(let i = 0; i <data.length; i++){ %>
-                <div class="td" data="<%= data[i].college_ID%>"><%= data[i].name %></div>
-                <div class="td"></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia1 %></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia2 %></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia3 %></div>
-                <div class="td"></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].as1 %></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].as2 %></div>
-                <div class="td"></div>
-                <div class="td" contenteditable="<%= editoption%>"><%= data[i].q1 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" data="<%= data[i].college_ID%>" id="<%= `name${i+1}`%>"><%= data[i].name %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia1' + `${i+1}`%>" contenteditable="<%= editoption%>"><%= data[i].ia1 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia2' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].ia2 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia3' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].ia3 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'as1' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].as1 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'as2' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].as2 %></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'q' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].q1 %></div>
 
             <% } %>
             
