@@ -79,7 +79,6 @@ $('#logout').click(()=>{
         
 });
 
-
 buttons.forEach((button,index)=>{
     index=index+1;
     console.log("hi")

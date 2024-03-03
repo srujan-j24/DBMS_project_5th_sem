@@ -74,11 +74,12 @@ app.get("/staff", (req, res) => {
                 res.render('login.ejs');
             }
             else{
-                pool.query("SELECT access_data from staff where ID=?",[req.cookies.staff.ID])
+                pool.query("SELECT sa.* from staff_access sa ,class c WHERE c.id = sa.class_ID  and staff_id =?",[req.cookies.staff.ID])
                 .then((result)=>{
-                    let access_data=(result[0][0].access_data.access_data);
-                    console.log(access_data);
-                    res.render('staffdashboard.ejs', {cards: access_data});
+                    console.log(result);//
+                    result=(result[0]);
+                    console.log(result);
+                    res.render('staffdashboard.ejs', {cards: result });
                 })
                 
             }
@@ -197,8 +198,8 @@ app.post("/sem",async(req,res)=>{
     let college_ID=Number(req.cookies.student.ID)
     pool.query("select m.*, s.name,s.credits from subjects s, marks m where s.sub_code = m.sub_code and college_ID = ? and s.sem_ID = ?;",[college_ID,sem])
         .then((result)=>{
-             result = result[0];
-            console.log(result)
+             result = result[0][0];
+            console.log(result);
             res.status(200).send(result);
         })
 })
