@@ -10,15 +10,15 @@ insert into branch values("CSE","Computer science and engineering"),
 insert into sem values(1),(2),(3),(4),(5),(6),(7),(8);
 
 insert into scheme values("2021_CSE",2021,"CSE"),
-                        ("2021_ISE",2021,"ISE"),
+                        ("2021_ISE",2021,"ISE");
 
 insert into class values("CSE_1_A",1,'A',"CSE"),
                         ("CSE_1_B",1,'B',"CSE");
 
-insert into subjects values("21MAT11",2021,"Calculus and differential equation",3,1),
-                            ("21PHY12",2021,"Engineering physics",3,1),
-                            ("21ELE13",2021,"Basic electrical engineering",3,1),
-                            ("21CIV14",2021,"Elements of civil engineering and mechanics",3,1);
+insert into subjects values("21MAT11","2021_CSE","Calculus and differential equation",3,1),
+                            ("21PHY12","2021_CSE","Engineering physics",3,1),
+                            ("21ELE13","2021_CSE","Basic electrical engineering",3,1),
+                            ("21CIV14","2021_CSE","Elements of civil engineering and mechanics",3,1);
 
 insert into student values(20210001,"Vinod",null,2021,"CSE","CSE_1_A","vin@123",0),
                         (20210002,"Vihaan",null,2021,"CSE","CSE_1_A","vih@123",0),
