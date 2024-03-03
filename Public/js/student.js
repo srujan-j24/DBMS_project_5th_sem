@@ -10,7 +10,12 @@ function append_data(data_array) {
     function create_data_div(data,additional_attribute){
         let new_div = document.createElement("div");
         new_div.classList.add("td");
-        new_div.innerText = data;
+        if(data == -1){
+            new_div.innerText=" ";
+        }
+        else{
+            new_div.innerText = data;
+        }
         if(i % 2 != 0){
             new_div.classList.add("light-grey")
         }
@@ -25,7 +30,10 @@ function append_data(data_array) {
         table.appendChild(create_data_div(sub_code,name));
         table.appendChild(create_data_div(credits));
         table.appendChild(create_data_div(" "));
+       
         table.appendChild(create_data_div(ia1));
+        
+        
         table.appendChild(create_data_div(ia2));
         table.appendChild(create_data_div(ia3));
         let avg = -1;
@@ -98,8 +106,9 @@ buttons.forEach((button,index)=>{
             root.style.setProperty('--header-color-light',light_color);
             root.style.setProperty('--table-display', 'flex');
             root.style.setProperty('--personal-display', 'none');
+            console.log(response)
             append_data(response)
-
+            
         })
         .fail((response)=>{
             console.log("error")
