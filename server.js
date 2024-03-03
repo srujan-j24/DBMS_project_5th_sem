@@ -73,12 +73,11 @@ app.get("/staff", (req, res) => {
                 res.render('login.ejs');
             }
             else{
-                pool.query("SELECT sa.* from staff_access sa ,class c WHERE c.id = sa.class_ID  and staff_id =?",[req.cookies.staff.ID])
+                pool.query("SELECT sa.*, s.is_hod from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
                 .then((result)=>{
-                    console.log(result);//
                     result=(result[0]);
-                    console.log(result);
-                    res.render('staffdashboard.ejs', {cards: result });
+                    let is_hod = result[0].is_hod == 1;
+                    res.render('staffdashboard.ejs', {cards: result, hod: is_hod });
                 })
                 
             }
@@ -262,4 +261,32 @@ app.post("/class/:class_id/:sub_code/edit",async (req,res)=>{
     }
     res.status(200).send(`/class/${req.params.class_id}/${req.params.sub_code}/view`);
     
-})
+});
+
+app.get("/student/manage", async (req, res)=>{
+    if(!req.cookies.staff){
+        res.render("login.ejs");
+    }else{
+        let result = await pool.query("select is_hod from staff where ID = ?", [req.cookies.staff.ID]);
+        if(result[0][0].is_hod == 0){
+            res.status(400).send("Your don't have access");
+        }else{
+            let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
+            res.render("mng-student.ejs");
+        }
+    }
+});
+
+app.get("/staff/manage", async (req, res)=>{
+    if(!req.cookies.staff){
+        res.render("login.ejs");
+    }else{
+        let result = await pool.query("select is_hod from staff where ID = ?", [req.cookies.staff.ID]);
+        if(result[0][0].is_hod == 0){
+            res.status(400).send("Your don't have access");
+        }else{
+            let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
+            res.render("mng-staff.ejs");
+        }
+    }
+});

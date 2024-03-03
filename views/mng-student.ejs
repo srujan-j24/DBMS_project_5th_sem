@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mng-student.css">
+    <title>Manage Student</title>
+</head>
+<body>
+    <dialog id="dialog">
+        <h2>Admit New Student</h2>
+        <button id="dig-x" onclick="toggleDialog()"></button>
+        <form action="">
+            <div id="dig-name">
+                <input type="text" placeholder="Enter student name" >
+            </div>
+
+            <div id="df2">
+                <div>
+                    <label for="">DOB: </label>
+                    <input type="date">
+                </div>
+                <div>
+                    <label for="">Blood type:</label>
+                    <select name="" id="blood-sel">
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B</option>
+                        <option value="B-">B-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+
+                    </select>
+                </div>
+                <div>
+                    <label for="">Validity:</label>
+                    <input type="number" name="" id="" min="3" max="4">
+                </div>
+
+            </div>
+            <div id="ph">
+                <div id="div1">
+                    <label for="">Student ph:</label>
+                    <input type="number">
+                </div>
+                <div id="div2">
+                    <label for="">Parent ph:</label>
+                    <input type="number">
+                </div>
+            </div>
+            <div id="tdiv">
+                <label for="">Address:</label>
+                <textarea name="" id=""></textarea>
+            </div>
+            <div>
+            </div>
+        </form>
+    </dialog>
+    <div id="navigation">
+        <p id="logo-txt">Student Info</p>
+        <div id="nav-btns-cont">
+            <button id="new-btn" class="nav-btns" onclick="toggleDialog()">Add Student</button>
+        </div>
+        <button id="logout">
+            <img src="/logout.svg" alt="">
+           
+        </button>
+    </div>
+    <hr>
+    <div id="table">
+
+    </div>
+    <script src="/mng-student.js"></script>
+</body>
+</html>
