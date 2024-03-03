@@ -99,6 +99,7 @@ CREATE TABLE IF NOT EXISTS staff_access(
     staff_id varchar(7),
     sub_code varchar(10),
     class_ID varchar(10),
+    primary key(staff_id,sub_code,class_ID),
     foreign key(staff_id) references staff(ID) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sub_code) references subjects(sub_code) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(class_ID) references class(id) ON DELETE CASCADE ON UPDATE CASCADE
