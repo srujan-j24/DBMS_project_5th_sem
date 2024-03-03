@@ -20,13 +20,13 @@
             <% for(let i = 0; i <cards.length; i++){ %>
             <div class="griditem">
                 <div>
-                    <p id="class">SubCode :</p><p id="class"> <%=cards[i][1] %></p>
+                    <p id="class">SubCode :</p><p id="class"> <%=cards[i].sub_code %></p>
                 </div>
                 <div>
-                     <p id="subcode">Class :</p> <p id="subcode"><%= cards[i][0] %></p></div>
+                     <p id="subcode">Class :</p> <p id="subcode"><%= cards[i].class_ID %></p></div>
                 <div>
-                    <button class="item-btns"><img src="/edit.svg" alt=""></button>
-                    <button class="item-btns"><img src="/view.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/edit"><img src="/edit.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/view"><img src="/view.svg" alt=""></button>
                 </div>
             </div>
             <% } %>

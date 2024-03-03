@@ -36,13 +36,13 @@
 -- (20210001, "21ELE13", -1, -1, -1, -1, -1, -1),
 -- (20210001, "21CIV14", -1, -1, -1, -1, -1, -1);
 
--- insert into staff values
--- ("ST_0001","Ramesh T",0,0,"r123@","CSE",0),
--- ("ST_0002","Suresh U",0,0,"su123@","CSE",0);
+insert into staff values
+("ST_0001","Ramesh T",0,0,"r123@","CSE",0),
+("ST_0002","Suresh U",0,0,"su123@","CSE",0);
 
--- insert into staff_access values
--- ("ST_0001","21PHY12","CSE_1_A"),
--- ("ST_0002","21ELE13","CSE_1_B");
+insert into staff_access values
+("ST_0001","21PHY12","CSE_1_A"),
+("ST_0002","21ELE13","CSE_1_B");
 
 insert into staff_access values
  ("ST_0001","21PHY12","CSE_1_B"),
