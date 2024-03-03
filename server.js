@@ -87,8 +87,15 @@ app.get("/staff", (req, res) => {
     }
 });
 
-app.get("/class", (req,res) =>{
-    res.render("class.ejs");
+app.get("/class/:class_ID/:sub_code/view", (req,res) =>{
+    console.log(req.params.class_ID)
+    if(req.cookies.staff) {
+        res.render("class.ejs")
+    }
+    else {
+        res.render("login.ejs");
+    }
+    
 })
 
 app.post("/login", (req, res) => {
