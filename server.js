@@ -205,7 +205,7 @@ app.post("/sem",async(req,res)=>{
     let college_ID=Number(req.cookies.student.ID)
     pool.query("select m.*, s.name,s.credits from subjects s, marks m where s.sub_code = m.sub_code and college_ID = ? and s.sem_ID = ?;",[college_ID,sem])
         .then((result)=>{
-             result = result[0][0];
+             result = result[0];
             console.log(result);
             res.status(200).send(result);
         })
