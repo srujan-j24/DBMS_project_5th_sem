@@ -193,12 +193,12 @@ async function getAcademicInfo(res){
 app.post("/sem",async(req,res)=>{
     //console.log('hi');
     let sem= req.body.sem;
-    sem= `sem${sem}`
+    
     let college_ID=Number(req.cookies.student.ID)
-    pool.query("select m.?? as ssem,s.?? as msem from student st,marks m,scheme s where st.college_ID=? and st.college_ID=m.college_ID and m.scheme_ID=s.ID and st.branch_ID=s.branch_ID;",[sem,sem,college_ID])
+    pool.query("select m.*, s.name,s.credits from subjects s, marks m where s.sub_code = m.sub_code and college_ID = ? and s.sem_ID = ?;",[college_ID,sem])
         .then((result)=>{
-            result = result[0][0];
+             result = result[0];
             console.log(result)
-            getAcademicInfo(result)
+            res.status(200).send(result);
         })
 })
