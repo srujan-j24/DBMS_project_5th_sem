@@ -97,7 +97,7 @@ app.get("/class/:class_ID/:sub_code/view", (req,res) =>{
                 if(result[0][0].count == 1){
                     pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
                         .then((result)=>{
-                            console.log(result[0]);
+                            
                             res.render("class.ejs",{data:result[0],editoption:false,class_ID:class_ID,sub_code:sub_code});
                         })
                     }
@@ -122,7 +122,7 @@ app.get("/class/:class_ID/:sub_code/edit", (req,res) =>{
                 if(result[0][0].count == 1){
                     pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
                         .then((result)=>{
-                            console.log(result[0]);
+                           
                             res.render("class.ejs",{data:result[0],editoption:true,class_ID:class_ID,sub_code:sub_code});
                         })
                     }
@@ -252,5 +252,14 @@ app.post("/sem",async(req,res)=>{
 })
 
 app.post("/class/:class_id/:sub_code/edit",async (req,res)=>{
-    console.log(req.body);
+    let vals = req.body.updatedvalues;
+    
+    for(i=0;i<vals.length;i++){
+        let v = [vals[i].ia1,vals[i].ia2,vals[i].ia3,vals[i].as1,vals[i].as2,vals[i].q1,req.params.sub_code,vals[i].college_ID];
+        
+        let result = await pool.query("update marks set ia1=?,ia2=?,ia3=?,as1=?,as2=?,q1=? where sub_code=? and college_ID=?",v);
+        
+    }
+    res.status(200).send(`/class/${req.params.class_id}/${req.params.sub_code}/view`);
+    
 })

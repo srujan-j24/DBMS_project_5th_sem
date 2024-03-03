@@ -124,3 +124,6 @@ hr{
 .light-grey{
     background-color: hwb(0 80% 20% / 0.2);
 }
+span{
+    font-size: 1.2rem;
+}

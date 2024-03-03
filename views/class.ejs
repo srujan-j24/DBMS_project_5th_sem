@@ -11,7 +11,13 @@
 </head>
 <body>
     <div id="navigation">
-        <p id="logo-txt" class-ID="<%= class_ID %>" sub-code="<%= sub_code %>"><%= class_ID %> <%= sub_code %></p>
+        <p id="logo-txt" class-ID="<%= class_ID %>" sub-code="<%= sub_code %>">
+            <%= class_ID %> : <%= sub_code %>
+            <span>
+                <%= editoption== true?"(Editable)":"(Read-Only)" %>
+            </span>
+        </p>
+
         <div id="nav-btns-cont">
             <% if(editoption) { %>
                 <button id="edit-btn" class="nav-btns">Save</button>
