@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS studentdbv2;
+CREATE DATABASE IF NOT EXISTS studentdb;
 
-USE studentdbv2;
+USE studentdb;
 
 CREATE TABLE IF NOT EXISTS branch(
     id varchar(5) primary key,
@@ -16,7 +16,8 @@ CREATE TABLE IF NOT EXISTS sem(
 );
 
 CREATE TABLE IF NOT EXISTS scheme(
-    id int,
+    id varchar(10),
+    year int,
     branch_ID varchar(5),
     primary key(id, branch_ID),
     foreign key(branch_ID) references branch(id) ON DELETE CASCADE ON UPDATE CASCADE 
@@ -24,7 +25,7 @@ CREATE TABLE IF NOT EXISTS scheme(
 
 CREATE TABLE IF NOT EXISTS subjects(
     sub_code varchar(10) primary key,
-    scheme_ID int,
+    scheme_ID varchar(10),
     name varchar(70),
     credits int,
     sem_ID int,

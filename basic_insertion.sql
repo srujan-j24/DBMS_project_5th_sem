@@ -9,18 +9,8 @@ insert into branch values("CSE","Computer science and engineering"),
 
 insert into sem values(1),(2),(3),(4),(5),(6),(7),(8);
 
-insert into scheme values(2021,"CSE"),
-                        (2021,"ISE"),
-                        (2021,"ADE"),
-                        (2021,"ECE"),
-                        (2021,"EEE"),
-                        (2021,"Civil"),
-                        (2022,"CSE"),
-                        (2022,"ISE"),
-                        (2022,"ADE"),
-                        (2022,"ECE"),
-                        (2022,"EEE"),
-                        (2022,"Civil");
+insert into scheme values("2021_CSE",2021,"CSE"),
+                        ("2021_ISE",2021,"ISE"),
 
 insert into class values("CSE_1_A",1,'A',"CSE"),
                         ("CSE_1_B",1,'B',"CSE");
@@ -39,3 +29,4 @@ insert into personal_info values(20210001,"B+","2002-12-02",9876543218,987654321
                                 (20210002,"O-","2003-02-22",7778889995,8886667779,"Bangalore",4),
                                 (20210003,"B+","2003-12-23",8888777798,8787789886,"Hubli",4),
                                 (20210004,"O+","2003-03-22",8888999976,7575897698,"Mysore",4);
+                                
