@@ -7,11 +7,7 @@ const logout = document.getElementById("logout");
 
 buttons.forEach((button,index) =>{
     button.addEventListener('click',()=> {
-        const targetColor = window.getComputedStyle(button).backgroundColor;
-        root.style.setProperty('--header-color', targetColor);
-        console.log(targetColor);
-        root.style.setProperty('--table-display', 'flex');
-        root.style.setProperty('--personal-display', 'none');
+        
     });
 });
 
@@ -30,13 +26,17 @@ $('#logout').click(()=>{
         
 });
 
-
 buttons.forEach((button,index)=>{
     index=index+1;
     console.log("hi")
     button.addEventListener("click",()=>{
         $.ajax({type:"POST",url:"/sem",data:{sem:index}})
         .done((response)=>{
+            const targetColor = window.getComputedStyle(button).backgroundColor;
+        root.style.setProperty('--header-color', targetColor);
+        console.log(targetColor);
+        root.style.setProperty('--table-display', 'flex');
+        root.style.setProperty('--personal-display', 'none');
             console.log(response)
         })
         .fail((response)=>{
