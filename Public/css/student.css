@@ -3,6 +3,7 @@
 }
 :root {
     --header-color: #ccc;
+    --header-color-light:#ccc;
     --table-display: none;
     --personal-display: flex;
 }
@@ -129,7 +130,7 @@ hr{
 #table{
     display: grid;
     flex-grow: 1;
-    grid-template-columns: repeat(16,1fr);
+    grid-template-columns: repeat(15,1fr);
     grid-auto-rows: 2.5rem;
     gap: 1px;
    
@@ -164,7 +165,9 @@ hr{
     box-sizing: border-box;
 }
 
-
+.light-grey{
+    background-color: var(--header-color-light);
+}
 
 #personal-info-wrapper{
     display: var(--personal-display);
