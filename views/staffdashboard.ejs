@@ -25,8 +25,8 @@
                 <div>
                      <p id="subcode">Class :</p> <p id="subcode"><%= cards[i].class_ID %></p></div>
                 <div>
-                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/edit"><img src="/edit.svg" alt=""></button>
-                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/view"><img src="/view.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/<%=cards[i].sub_code %>/edit"><img src="/edit.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/<%=cards[i].sub_code %>/view"><img src="/view.svg" alt=""></button>
                 </div>
             </div>
             <% } %>
