@@ -272,7 +272,11 @@ app.get("/student/manage", async (req, res)=>{
             res.status(400).send("Your don't have access");
         }else{
             let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
-            res.render("mng-student.ejs");
+            let classes = await pool.query("select c.* from staff s, class c where s.branch_ID = c.branch_ID and s.ID = ?", [req.cookies.staff.ID]);
+            let students = await pool.query("select s.name, college_ID from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
+
+            console.log(classes);
+            res.render("mng-student.ejs", {classes: classes[0], students: students[0]});
         }
     }
 });
@@ -289,4 +293,9 @@ app.get("/staff/manage", async (req, res)=>{
             res.render("mng-staff.ejs");
         }
     }
+});
+
+
+app.post("/student/new", (req, res)=>{
+    console.log(req.body);
 });

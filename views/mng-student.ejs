@@ -7,22 +7,23 @@
     <title>Manage Student</title>
 </head>
 <body>
-    <dialog id="dialog">
+    <dialog id="dialog" class="border-gradient">
         <h2>Admit New Student</h2>
+        <hr>
         <button id="dig-x" onclick="toggleDialog()"></button>
-        <form action="">
+        <form action="/student/new" method="post">
             <div id="dig-name">
-                <input type="text" placeholder="Enter student name" >
+                <input type="text" name="name" placeholder="Enter student name" >
             </div>
 
             <div id="df2">
                 <div>
                     <label for="">DOB: </label>
-                    <input type="date">
+                    <input type="date" name="dob">
                 </div>
                 <div>
                     <label for="">Blood type:</label>
-                    <select name="" id="blood-sel">
+                    <select name="blood_type" id="blood-sel">
                         <option value="A+">A+</option>
                         <option value="A-">A-</option>
                         <option value="B+">B</option>
@@ -34,28 +35,35 @@
 
                     </select>
                 </div>
-                <div>
-                    <label for="">Validity:</label>
-                    <input type="number" name="" id="" min="3" max="4">
-                </div>
 
             </div>
             <div id="ph">
                 <div id="div1">
                     <label for="">Student ph:</label>
-                    <input type="number">
+                    <input type="number" name="student_ph">
                 </div>
                 <div id="div2">
                     <label for="">Parent ph:</label>
-                    <input type="number">
+                    <input type="number" name="parent_ph">
                 </div>
             </div>
             <div id="tdiv">
                 <label for="">Address:</label>
-                <textarea name="" id=""></textarea>
+                <textarea name="" id="" name="address"></textarea>
             </div>
             <div>
+                <label for="">Class</label>
+                <select name="" id="" name="cur_class_id">
+                    <% for(let i = 0; i < classes.length; i++) { %>
+                        <option value="<%= classes[i].id%>"><%= classes[i].sem_ID + classes[i].section%></option>
+                    <% } %>
+                </select>
             </div>
+            <div>
+                <label for="">Validity:</label>
+                <input type="number" name="validity" id="" min="3" max="4">
+            </div>
+            <button type="submit" class="nav-btns">Admit</button>
         </form>
     </dialog>
     <div id="navigation">
@@ -65,12 +73,15 @@
         </div>
         <button id="logout">
             <img src="/logout.svg" alt="">
-           
         </button>
     </div>
     <hr>
     <div id="table">
-
+        <% for(let i = 0; i < students.length; i++) { %>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= students[i].name %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= students[i].college_ID %></div>
+        <% } %>
     </div>
     <script src="/mng-student.js"></script>
 </body>

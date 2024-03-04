@@ -45,7 +45,7 @@ body{
     
 }
 #new-btn{
-    aspect-ratio: 3.5 / 1;
+    aspect-ratio: 4.5 / 1;
     border-radius: 2rem;
     background-color: #ffdab9;
 }
@@ -147,16 +147,11 @@ hr{
     box-sizing: border-box;
 }
 
-#table{
-    margin: 2rem;
-    display: grid;
-    box-sizing: border-box;
-    border: 1px solid black;
-}
+
 dialog{
     border-radius: 1rem;
-    width: 50vw;
-    height: 50vh;
+    padding-block: 3rem;
+    padding-top: 2rem;
 }
 #dig-x{
     position: absolute;
@@ -179,11 +174,11 @@ dialog > h2{
 }
 
 dialog > form{
-    margin-block-start: 1rem;
-    padding-inline: 1rem;
+    margin-block-start: 2rem;
+    padding-inline: 2.5rem;
     gap: 2rem;
     display: grid;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto auto auto auto;
     grid-auto-rows: 2rem;
 }
 dialog > form   input, select, textarea{
@@ -200,11 +195,14 @@ dialog > form  input:focus, select:focus, textarea:focus{
     outline: 1px solid grey;
     outline-offset: 0.25rem;
 }
+select{
+    padding: 0.25rem;
+}
 dialog > form label{
     font-size: 1rem;
 }
 #dig-name{
-    grid-column: span 2;
+    grid-column: span 4;
     justify-self: center;
     width: 100%;
     display: flex;
@@ -227,7 +225,7 @@ dialog form div {
 }
 #tdiv {
     grid-row: span 2;
-    grid-column: span 2;
+    grid-column: span 3;
     display: flex;
     flex-direction: column;
 }
@@ -242,12 +240,12 @@ dialog form div {
 
 }
 #df2{
-    grid-column: span 2;
+    grid-column: span 4;
     justify-content: space-between;
 }
 
 #ph{
-    grid-column: span 2;
+    grid-column: span 4;
     justify-content: space-between;
 }
 #ph #div1{
@@ -258,4 +256,47 @@ dialog form div {
 }
 #ph  input{
     width: 60%;
+}
+
+form > button{
+    grid-column: span 4;
+    justify-self: center;
+    width: 50%;
+    height: 3rem !important;
+    border-radius: 3rem;
+    background-color: #03abff9b;
+}
+dialog > hr{
+    width: 40vw !important;
+    margin: 1rem auto;
+}
+
+#table{
+    display: grid;
+    grid-template-columns: 3rem auto auto;
+    grid-auto-rows: 3rem;
+    margin: 2rem;
+    box-sizing: border-box;
+    border: 1px solid black;
+    align-items: center;
+}
+
+#table > div{
+    height: 3rem;
+    display: flex;
+    align-items: center;
+}
+#table > .si{
+    padding-inline-start: 1rem;
+    box-sizing: border-box;
+}
+.light-grey{
+    background-color: hsla(0, 0%, 80%, 0.2);
+}
+.border-gradient {
+  border: 10px solid;
+  border-image-slice: 1;
+  border-width: 4px;
+  border-radius: 0;
+  border-image-source: linear-gradient(180deg, #fff 0%, #03aaff 45%, #03aaff 55%, #fff 100%);;
 }
