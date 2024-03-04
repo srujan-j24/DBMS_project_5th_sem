@@ -11,12 +11,19 @@
 </head>
 <body>
     <div id="navigation">
-        <p id="logo-txt">Class Info</p>
+        <p id="logo-txt" class-ID="<%= class_ID %>" sub-code="<%= sub_code %>"><%= class_ID %> <%= sub_code %></p>
         <div id="nav-btns-cont">
-            <button id="edit-btn" class="nav-btns">Edit</button>
+            <% if(editoption) { %>
+                <button id="edit-btn" class="nav-btns">Save</button>
+    
+            <% } else { %>
+                <button id="edit-btn" class="nav-btns"><a href="/class/<%= class_ID %>/<%= sub_code%>/edit">Edit</a></button>
+            <% } %>
+            
         </div>
         <button id="home">
-            <img src="/home.svg" alt="">
+            <a href="/staff"> <img src="/home.svg" alt=""></a>
+           
 
         </button>
         </div>
@@ -39,21 +46,25 @@
             
         
             <% for(let i = 0; i <data.length; i++){ %>
-                <div class="td"><%= data[i].name %></div>
+                <div class="td" data="<%= data[i].college_ID%>"><%= data[i].name %></div>
                 <div class="td"></div>
-                <div class="td"><%= data[i].ia1 %></div>
-                <div class="td"><%= data[i].ia2 %></div>
-                <div class="td"><%= data[i].ia3 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia1 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia2 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].ia3 %></div>
                 <div class="td"></div>
-                <div class="td"><%= data[i].as1 %></div>
-                <div class="td"><%= data[i].as2 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].as1 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].as2 %></div>
                 <div class="td"></div>
-                <div class="td"><%= data[i].q1 %></div>
+                <div class="td" contenteditable="<%= editoption%>"><%= data[i].q1 %></div>
 
             <% } %>
             
         </div>
     </div>
+    <% if(editoption) { %>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="/classpage.js"></script>
     
+    <% } %>
 </body>
 </html>

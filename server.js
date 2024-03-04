@@ -98,7 +98,7 @@ app.get("/class/:class_ID/:sub_code/view", (req,res) =>{
                     pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
                         .then((result)=>{
                             console.log(result[0]);
-                            res.render("class.ejs",{data:result[0]});
+                            res.render("class.ejs",{data:result[0],editoption:false,class_ID:class_ID,sub_code:sub_code});
                         })
                     }
                 else{
@@ -117,7 +117,24 @@ app.get("/class/:class_ID/:sub_code/edit", (req,res) =>{
         let staff_id = req.cookies.staff.ID; 
         let class_ID = req.params.class_ID;
         let sub_code = req.params.sub_code;
+        pool.query("select count(*) as count from staff_access where staff_id = ? and class_ID = ? and sub_code = ?",[staff_id,class_ID,sub_code] )
+            .then((result)=>{
+                if(result[0][0].count == 1){
+                    pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
+                        .then((result)=>{
+                            console.log(result[0]);
+                            res.render("class.ejs",{data:result[0],editoption:true,class_ID:class_ID,sub_code:sub_code});
+                        })
+                    }
+                else{
+                    res.status(400).send("Invalid request");
+                }
+            })     
     }
+    else {
+        res.render("login.ejs");
+    }  
+
 })
 
 
@@ -232,4 +249,8 @@ app.post("/sem",async(req,res)=>{
             console.log(result);
             res.status(200).send(result);
         })
+})
+
+app.post("/class/:class_id/:sub_code",async (req,res)=>{
+    console.log(req.body);
 })

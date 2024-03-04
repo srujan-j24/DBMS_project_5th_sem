@@ -34,11 +34,16 @@ body{
     
 }
 #edit-btn{
-    
+    text-decoration: none;
     aspect-ratio: 3.5 / 1;
     border-radius: 2rem;
     background-color: #ffdab9;
 }
+a{
+    text-decoration: none;
+    color: black;
+}
+
 #nav-btns-cont{
     flex-grow: 1;
     display: flex;
@@ -65,7 +70,6 @@ body{
     background-color: rgba(0, 0, 0, 0.1);
 }
 #logo-txt{
-    font-family: "Inknut Antiqua", serif;
     font-size: 2rem;
     margin: 0;
 }
