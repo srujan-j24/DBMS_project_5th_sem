@@ -10,16 +10,18 @@
     <title>Staff</title>
 </head>
 <body>
-    <nav>
-        <p>Dashboard</p>
+    <div id="navigation">
+        <p class="logo-txt">Dashboard</p>
         <% if(hod){ %>
             <div id="nav-btns-cont">
                 <button class="nav-btns" id="mng-btn1" onclick="window.location.href='/student/manage'">Manage Student</button>
                 <button class="nav-btns" id="mng-btn2" onclick="window.location.href='/staff/manage'">Manage Staff</button>
             </div>
         <% } %>
-        <img src="/logout.svg" alt="" id="logout">
-    </nav>
+        <button id="logout">
+            <img src="/logout.svg" alt="" id="logout">
+        </button>
+    </div>
     <hr>
     <div>
         <div class="gridcontainer">

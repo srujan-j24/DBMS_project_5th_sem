@@ -76,6 +76,7 @@ app.get("/staff", (req, res) => {
                 pool.query("SELECT sa.*, s.is_hod from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
                 .then((result)=>{
                     result=(result[0]);
+                    console.log(result);
                     let is_hod = result[0].is_hod == 1;
                     res.render('staffdashboard.ejs', {cards: result, hod: is_hod });
                 })

@@ -38,7 +38,7 @@ function append_data(data_array) {
         table.appendChild(create_data_div(ia3));
         let avg = -1;
         if(ia1!= -1 && ia2!=-1 && ia3!=-1) {
-            avg = sum(ia1,ia2,ia3)/3;
+            avg = Math.round((ia1+ia2+ia3)/3);
             table.appendChild(create_data_div(avg));
         }
         else {
@@ -47,7 +47,7 @@ function append_data(data_array) {
         table.appendChild(create_data_div(as1));
         table.appendChild(create_data_div(as2));
         if(as1!=-1 && as2!=-1) {
-            avg = sum(as1,as2)/2;
+            avg = Math.round((as1+as2)/2);
             table.appendChild(create_data_div(avg));
         }
         else {

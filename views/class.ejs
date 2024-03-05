@@ -57,10 +57,10 @@
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia1' + `${i+1}`%>" contenteditable="<%= editoption%>"><%= data[i].ia1 %></div>
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia2' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].ia2 %></div>
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'ia3' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].ia3 %></div>
-                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"><%= (data[i].ia1+data[i].ia2+data[i].ia3)%></div>
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'as1' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].as1 %></div>
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'as2' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].as2 %></div>
-                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"></div>
+                <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>"><%=(data[i].as1+data[i].as2)/2%></div>
                 <div class="td <%= i%2!= 0 ? 'light-grey': ' ' %>" id="<%= 'q' + `${i+1}` %>" contenteditable="<%= editoption%>"><%= data[i].q1 %></div>
 
             <% } %>
