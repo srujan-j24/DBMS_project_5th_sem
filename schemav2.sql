@@ -1,6 +1,6 @@
-CREATE DATABASE IF NOT EXISTS studentdbv2;
+CREATE DATABASE IF NOT EXISTS studentdb;
 
-USE studentdbv2;
+USE studentdb;
 
 CREATE TABLE IF NOT EXISTS branch(
     id varchar(5) primary key,
@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS branch(
 
 CREATE TABLE IF NOT EXISTS batch(
     id int primary key
+
 );
 
 CREATE TABLE IF NOT EXISTS sem(
@@ -16,18 +17,22 @@ CREATE TABLE IF NOT EXISTS sem(
 );
 
 CREATE TABLE IF NOT EXISTS scheme(
-    id int,
+    id varchar(10),
+    year int,
     branch_ID varchar(5),
     primary key(id, branch_ID),
     foreign key(branch_ID) references branch(id) ON DELETE CASCADE ON UPDATE CASCADE 
 );
+ALTER TABLE batch add column scheme_ID varchar(10);
+ALTER TABLE batch add constraint scheme_ID foreign key(scheme_ID) references scheme(id) on update cascade;
 
 CREATE TABLE IF NOT EXISTS subjects(
     sub_code varchar(10) primary key,
-    scheme_ID int,
+    scheme_ID varchar(10),
     name varchar(70),
     credits int,
     sem_ID int,
+
     foreign key(scheme_ID) references scheme(id) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sem_ID) references sem(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -70,12 +75,12 @@ CREATE TABLE IF NOT EXISTS personal_info(
 CREATE TABLE IF NOT EXISTS marks(
     college_ID int, 
     sub_code varchar(10),
-    ia1 float,
-    ia2 float,
-    ia3 float,
-    as1 float,
-    as2 float,
-    q1 float,
+    ia1 float default -1,
+    ia2 float default -1,
+    ia3 float default -1,
+    as1 float default -1,
+    as2 float default -1,
+    q1 float default -1,
     primary key(college_ID, sub_code),
     foreign key(college_ID) references student(college_ID) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sub_code) references subjects(sub_code)  ON DELETE CASCADE ON UPDATE CASCADE
@@ -96,6 +101,7 @@ CREATE TABLE IF NOT EXISTS staff_access(
     staff_id varchar(7),
     sub_code varchar(10),
     class_ID varchar(10),
+    primary key(staff_id,sub_code,class_ID),
     foreign key(staff_id) references staff(ID) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sub_code) references subjects(sub_code) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(class_ID) references class(id) ON DELETE CASCADE ON UPDATE CASCADE

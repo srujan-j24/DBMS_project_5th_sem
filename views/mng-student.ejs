@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mng-student.css">
+    <title>Manage Student</title>
+</head>
+<body>
+    <dialog id="dialog" class="border-gradient">
+        <h2>Admit New Student</h2>
+        <hr>
+        <button id="dig-x" onclick="toggleDialog()"></button>
+        <form action="/student/new" method="post">
+            <div id="dig-name">
+                <input type="text" name="name" placeholder="Enter student name" value="Kiaan">
+            </div>
+
+            <div id="df2">
+                <div>
+                    <label for="">Class</label>
+                    <select id="" name="cur_class_id">
+                        <% for(let i = 0; i < classes.length; i++) { %>
+                            <option value="<%= classes[i].id%>"><%= classes[i].sem_ID + classes[i].section%></option>
+                        <% } %>
+                    </select>
+                </div>
+                <div>
+                    <label for="">Validity:</label>
+                    <input type="number" name="validity" id="" min="3" max="4">
+                </div>
+                <div style="display: none;">
+                    <input type="text" value="<%= branch %>" name="branch_id">
+                </div>
+                <div>
+                    <label for="">Password</label>
+                    <input type="password" name="password" maxlength="15">
+                </div>
+                <div>
+                    <label for="">Batch: </label>
+                    <select name="batch_id" id="">
+                        <% for(let i = 0; i < batches.length; i++) { %>
+                            <option value="<%= batches[i].id%>"><%= batches[i].id %></option>
+                        <% } %>
+                    </select>
+                </div>
+                
+
+            </div>
+            <div id="ph">
+                <div id="div1">
+                    <label for="">Student ph:</label>
+                    <input type="number" name="student_ph" value="1234567899">
+                </div>
+                <div id="div2">
+                    <label for="">Parent ph:</label>
+                    <input type="number" name="parent_ph" value="9876543211">
+                </div>
+            </div>
+            <div id="tdiv">
+                <label for="">Address:</label>
+                <textarea id="" name="address"></textarea>
+            </div>
+            <div>
+                <label for="">DOB: </label>
+                <input type="date" name="dob">
+            </div>
+            <div>
+                <label for="">Blood type:</label>
+                <select name="blood_type" id="blood-sel">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+
+                </select>
+            </div>
+            <button type="submit" class="nav-btns">Admit</button>
+        </form>
+    </dialog>
+    <div id="navigation">
+        <p id="logo-txt">Manage Student</p>
+        <div id="nav-btns-cont">
+            <button id="new-btn" class="nav-btns" onclick="toggleDialog()">Add Student</button>
+        </div>
+        <button id="logout">
+            <img src="/logout.svg" alt="">
+        </button>
+    </div>
+    <hr>
+    <div id="table">
+        <% for(let i = 0; i < students.length; i++) { %>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= students[i].name %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= students[i].college_ID %></div>
+        <% } %>
+    </div>
+    <script src="/mng-student.js"></script>
+</body>
+</html>

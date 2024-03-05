@@ -62,7 +62,6 @@ app.get("/student", (req, res)=>{
     
 });
 
-
 app.get("/staff", (req, res) => {
     if( !req.cookies.staff ) {//staff cookie is not present
         res.render("login.ejs");
@@ -74,11 +73,12 @@ app.get("/staff", (req, res) => {
                 res.render('login.ejs');
             }
             else{
-                pool.query("SELECT access_data from staff where ID=?",[req.cookies.staff.ID])
+                pool.query("SELECT sa.*, s.is_hod from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
                 .then((result)=>{
-                    let access_data=(result[0][0].access_data.access_data);
-                    console.log(access_data);
-                    res.render('staffdashboard.ejs', {cards: access_data});
+                    result=(result[0]);
+                    console.log(result);
+                    let is_hod = result[0].is_hod == 1;
+                    res.render('staffdashboard.ejs', {cards: result, hod: is_hod });
                 })
                 
             }
@@ -86,9 +86,57 @@ app.get("/staff", (req, res) => {
     }
 });
 
-app.get("/class", (req,res) =>{
-    res.render("class.ejs");
+app.get("/class/:class_ID/:sub_code/view", (req,res) =>{
+    console.log(req.params.class_ID)
+    if(req.cookies.staff) {
+        let staff_id = req.cookies.staff.ID; 
+        let class_ID = req.params.class_ID;
+        let sub_code = req.params.sub_code;
+        pool.query("select count(*) as count from staff_access where staff_id = ? and class_ID = ? and sub_code = ?",[staff_id,class_ID,sub_code] )
+            .then((result)=>{
+                if(result[0][0].count == 1){
+                    pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
+                        .then((result)=>{
+                            
+                            res.render("class.ejs",{data:result[0],editoption:false,class_ID:class_ID,sub_code:sub_code});
+                        })
+                    }
+                else{
+                    res.status(400).send("Invalid request");
+                }
+            })     
+    }
+    else {
+        res.render("login.ejs");
+    }  
 })
+
+app.get("/class/:class_ID/:sub_code/edit", (req,res) =>{
+    console.log(req.params.class_ID)
+    if(req.cookies.staff) {
+        let staff_id = req.cookies.staff.ID; 
+        let class_ID = req.params.class_ID;
+        let sub_code = req.params.sub_code;
+        pool.query("select count(*) as count from staff_access where staff_id = ? and class_ID = ? and sub_code = ?",[staff_id,class_ID,sub_code] )
+            .then((result)=>{
+                if(result[0][0].count == 1){
+                    pool.query("SELECT s.name,m.* from student s, marks m where s.college_ID = m.college_ID and cur_class_ID= ? and sub_code= ?",[class_ID,sub_code])
+                        .then((result)=>{
+                           
+                            res.render("class.ejs",{data:result[0],editoption:true,class_ID:class_ID,sub_code:sub_code});
+                        })
+                    }
+                else{
+                    res.status(400).send("Invalid request");
+                }
+            })     
+    }
+    else {
+        res.render("login.ejs");
+    }  
+
+})
+
 
 app.post("/login", (req, res) => {
     let username = req.body.username;
@@ -104,7 +152,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE student set logged_in=1 where college_ID=?",[username]);
-                    res.cookie('student', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
+                    res.cookie('student', { ID: username }, { maxAge: 60 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/student");
                 }
                 else{
@@ -122,7 +170,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
-                    res.cookie('staff', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
+                    res.cookie('staff', { ID: username }, { maxAge: 60 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/staff");
                 }
                 else {
@@ -193,12 +241,98 @@ async function getAcademicInfo(res){
 app.post("/sem",async(req,res)=>{
     //console.log('hi');
     let sem= req.body.sem;
-    sem= `sem${sem}`
+    
     let college_ID=Number(req.cookies.student.ID)
-    pool.query("select m.?? as ssem,s.?? as msem from student st,marks m,scheme s where st.college_ID=? and st.college_ID=m.college_ID and m.scheme_ID=s.ID and st.branch_ID=s.branch_ID;",[sem,sem,college_ID])
+    pool.query("select m.*, s.name,s.credits from subjects s, marks m where s.sub_code = m.sub_code and college_ID = ? and s.sem_ID = ?;",[college_ID,sem])
         .then((result)=>{
-            result = result[0][0];
-            console.log(result)
-            getAcademicInfo(result)
+             result = result[0];
+            console.log(result);
+            res.status(200).send(result);
         })
 })
+
+app.post("/class/:class_id/:sub_code/edit",async (req,res)=>{
+    let vals = req.body.updatedvalues;
+    
+    for(i=0;i<vals.length;i++){
+        let v = [vals[i].ia1,vals[i].ia2,vals[i].ia3,vals[i].as1,vals[i].as2,vals[i].q1,req.params.sub_code,vals[i].college_ID];
+        
+        let result = await pool.query("update marks set ia1=?,ia2=?,ia3=?,as1=?,as2=?,q1=? where sub_code=? and college_ID=?",v);
+        
+    }
+    res.status(200).send(`/class/${req.params.class_id}/${req.params.sub_code}/view`);
+    
+});
+
+app.get("/student/manage", async (req, res)=>{
+    if(!req.cookies.staff){
+        res.render("login.ejs");
+    }else{
+        let result = await pool.query("select is_hod, branch_ID from staff where ID = ?", [req.cookies.staff.ID]);
+        if(result[0][0].is_hod == 0){
+            res.status(400).send("Your don't have access");
+        }else{
+            let classes = await pool.query("select c.* from staff s, class c where s.branch_ID = c.branch_ID and s.ID = ?", [req.cookies.staff.ID]);
+            let students = await pool.query("select s.name, college_ID from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
+            let batches = await pool.query("select * from batch");
+            console.log(batches);
+            console.log(classes);
+            console.log(students);
+            console.log(result);
+            res.render("mng-student.ejs", {classes: classes[0], students: students[0], batches: batches[0],branch:result[0][0].branch_ID});
+        }
+    }
+});
+
+app.get("/staff/manage", async (req, res)=>{
+    if(!req.cookies.staff){
+        res.render("login.ejs");
+    }else{
+        let result = await pool.query("select is_hod from staff where ID = ?", [req.cookies.staff.ID]);
+        if(result[0][0].is_hod == 0){
+            res.status(400).send("Your don't have access");
+        }else{
+            let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
+            res.render("mng-staff.ejs");
+        }
+    }
+});
+
+
+app.post("/student/new", async (req, res)=>{
+    let {name,dob,blood_type,student_ph,parent_ph,address,cur_class_id,validity,batch_id,branch_id} = req.body;
+    console.log(req.body);
+    let st_count = await pool.query("select count(*) as count from student where batch_ID=?",[Number(batch_id)]);
+    
+    console.log(st_count);
+    let nxt_clgID = `${batch_id}${(st_count[0][0].count+1).toString().padStart(4,'0')}`;
+    nxt_clgID = Number(nxt_clgID);
+    console.log(nxt_clgID);
+    pool.query("INSERT into student (college_ID,name,batch_ID,branch_ID,cur_class_ID,password) values(?,?,?,?,?,?) ",[nxt_clgID,name,batch_id,branch_id,cur_class_id,password])
+        .then(()=>{
+            pool.query("INSERT into personal_info(college_ID,blood_type,DOB,personal+phone,parent_phone,address,validity) values(?,?,?,?,?,?,?)",[nxt_clgID,blood_type,dob,student_ph,parent_ph,address,validity]);
+        })
+        .then(()=>{
+            pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",[cur_class_id]);
+
+        })
+        .then((result)=>{
+            
+        })
+
+    //console.log(req.body);
+});
+
+
+function xyz(){
+    pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",['CSE_1_A'])
+      .then((result)=>{
+        result = result[0];
+        for(i=0;i<result.length;i++){
+            p
+            console.log(result[i].sub_code);
+
+        }
+      })
+}
+xyz();

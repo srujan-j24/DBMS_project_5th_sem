@@ -10,23 +10,31 @@
     <title>Staff</title>
 </head>
 <body>
-    <nav>
-        <p>Dashboard</p>
-        <img src="/logout.svg" alt="" id="logout">
-    </nav>
+    <div id="navigation">
+        <p class="logo-txt">Dashboard</p>
+        <% if(hod){ %>
+            <div id="nav-btns-cont">
+                <button class="nav-btns" id="mng-btn1" onclick="window.location.href='/student/manage'">Manage Student</button>
+                <button class="nav-btns" id="mng-btn2" onclick="window.location.href='/staff/manage'">Manage Staff</button>
+            </div>
+        <% } %>
+        <button id="logout">
+            <img src="/logout.svg" alt="" id="logout">
+        </button>
+    </div>
     <hr>
     <div>
         <div class="gridcontainer">
             <% for(let i = 0; i <cards.length; i++){ %>
             <div class="griditem">
                 <div>
-                    <p id="class">SubCode :</p><p id="class"> <%=cards[i][1] %></p>
+                    <p id="class">SubCode :</p><p id="class"> <%=cards[i].sub_code %></p>
                 </div>
                 <div>
-                     <p id="subcode">Class :</p> <p id="subcode"><%= cards[i][0] %></p></div>
+                     <p id="subcode">Class :</p> <p id="subcode"><%= cards[i].class_ID %></p></div>
                 <div>
-                    <button class="item-btns"><img src="/edit.svg" alt=""></button>
-                    <button class="item-btns"><img src="/view.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/<%=cards[i].sub_code %>/edit"><img src="/edit.svg" alt=""></button>
+                    <button class="item-btns" data = "/class/<%=cards[i].class_ID %>/<%=cards[i].sub_code %>/view"><img src="/view.svg" alt=""></button>
                 </div>
             </div>
             <% } %>

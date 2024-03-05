@@ -1,6 +1,84 @@
 *{
     font-family: "Inter",sans-serif;
 }
+
+#navigation{
+    background-color: white;
+    height: 12%;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+body{
+    height:100vh;
+    margin:0;
+    display: flex;
+    flex-direction: column;
+}
+ 
+.nav-btns{
+    height: 50%;
+     font-size: 1.2rem; 
+    font-size: 120%;
+    border: 0;
+    outline: 1px solid transparent;
+    outline-offset: -2px;
+    transition: 300ms;
+    cursor: pointer;
+}
+.nav-btns:hover{
+    outline: 1px solid grey;
+    outline-offset: 0.25rem;
+    
+}
+#edit-btn{
+    text-decoration: none;
+    aspect-ratio: 3.5 / 1;
+    border-radius: 2rem;
+    background-color: #ffdab9;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+#nav-btns-cont{
+    flex-grow: 1;
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+    gap:1rem;
+    
+}
+#home{
+    height: 50%;
+    aspect-ratio: 1 / 1;
+    background: transparent;
+    border: 0;
+    transition: 300ms;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    outline: 1px solid transparent;
+    outline-offset: -2px;
+}
+#home:hover{
+    outline: 1px solid grey;
+    outline-offset: 0.25rem;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+#logo-txt{
+    font-size: 2rem;
+    margin: 0;
+}
+hr{
+    margin: 0;
+    place-self: center;
+    width: calc(100vw - 6rem);
+    box-sizing: border-box;
+}
 #table-container1{
     background-color: white;
     gap: 1px;
@@ -10,9 +88,11 @@
 #table1{
     display: grid;
     flex-grow: 1;
-    grid-template-columns:20vw repeat(10,1fr);  
+    grid-template-columns:20vw repeat(9,1fr);  
     grid-auto-rows: 2.5rem;
     gap: 1px;
+    box-sizing: border-box;
+    border: 1px solid black;
 }
 .hr21{
     grid-row: span 2;
@@ -33,4 +113,17 @@
     padding: 0.5rem;
     box-sizing: border-box;
     background-color: #ccc;
+}
+.td{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+.light-grey{
+    background-color: hwb(0 80% 20% / 0.2);
+}
+span{
+    font-size: 1.2rem;
 }
