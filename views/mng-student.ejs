@@ -13,55 +13,71 @@
         <button id="dig-x" onclick="toggleDialog()"></button>
         <form action="/student/new" method="post">
             <div id="dig-name">
-                <input type="text" name="name" placeholder="Enter student name" >
+                <input type="text" name="name" placeholder="Enter student name" value="Kiaan">
             </div>
 
             <div id="df2">
                 <div>
-                    <label for="">DOB: </label>
-                    <input type="date" name="dob">
-                </div>
-                <div>
-                    <label for="">Blood type:</label>
-                    <select name="blood_type" id="blood-sel">
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B</option>
-                        <option value="B-">B-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-
+                    <label for="">Class</label>
+                    <select id="" name="cur_class_id">
+                        <% for(let i = 0; i < classes.length; i++) { %>
+                            <option value="<%= classes[i].id%>"><%= classes[i].sem_ID + classes[i].section%></option>
+                        <% } %>
                     </select>
                 </div>
+                <div>
+                    <label for="">Validity:</label>
+                    <input type="number" name="validity" id="" min="3" max="4">
+                </div>
+                <div style="display: none;">
+                    <input type="text" value="<%= branch %>" name="branch_id">
+                </div>
+                <div>
+                    <label for="">Password</label>
+                    <input type="password" name="password" maxlength="15">
+                </div>
+                <div>
+                    <label for="">Batch: </label>
+                    <select name="batch_id" id="">
+                        <% for(let i = 0; i < batches.length; i++) { %>
+                            <option value="<%= batches[i].id%>"><%= batches[i].id %></option>
+                        <% } %>
+                    </select>
+                </div>
+                
 
             </div>
             <div id="ph">
                 <div id="div1">
                     <label for="">Student ph:</label>
-                    <input type="number" name="student_ph">
+                    <input type="number" name="student_ph" value="1234567899">
                 </div>
                 <div id="div2">
                     <label for="">Parent ph:</label>
-                    <input type="number" name="parent_ph">
+                    <input type="number" name="parent_ph" value="9876543211">
                 </div>
             </div>
             <div id="tdiv">
                 <label for="">Address:</label>
-                <textarea name="" id="" name="address"></textarea>
+                <textarea id="" name="address"></textarea>
             </div>
             <div>
-                <label for="">Class</label>
-                <select name="" id="" name="cur_class_id">
-                    <% for(let i = 0; i < classes.length; i++) { %>
-                        <option value="<%= classes[i].id%>"><%= classes[i].sem_ID + classes[i].section%></option>
-                    <% } %>
+                <label for="">DOB: </label>
+                <input type="date" name="dob">
+            </div>
+            <div>
+                <label for="">Blood type:</label>
+                <select name="blood_type" id="blood-sel">
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B</option>
+                    <option value="B-">B-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+
                 </select>
-            </div>
-            <div>
-                <label for="">Validity:</label>
-                <input type="number" name="validity" id="" min="3" max="4">
             </div>
             <button type="submit" class="nav-btns">Admit</button>
         </form>

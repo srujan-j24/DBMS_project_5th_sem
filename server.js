@@ -152,7 +152,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE student set logged_in=1 where college_ID=?",[username]);
-                    res.cookie('student', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
+                    res.cookie('student', { ID: username }, { maxAge: 60 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/student");
                 }
                 else{
@@ -170,7 +170,7 @@ app.post("/login", (req, res) => {
                 let count = result[0][0].count;
                 if(count == 1){
                     pool.query("UPDATE staff set logged_in=1 where ID=?",[username]);
-                    res.cookie('staff', { ID: username }, { maxAge: 15 * 60 * 1000, httpOnly: true });
+                    res.cookie('staff', { ID: username }, { maxAge: 60 * 60 * 1000, httpOnly: true });
                     res.status(200).send("/staff");
                 }
                 else {
@@ -268,16 +268,18 @@ app.get("/student/manage", async (req, res)=>{
     if(!req.cookies.staff){
         res.render("login.ejs");
     }else{
-        let result = await pool.query("select is_hod from staff where ID = ?", [req.cookies.staff.ID]);
+        let result = await pool.query("select is_hod, branch_ID from staff where ID = ?", [req.cookies.staff.ID]);
         if(result[0][0].is_hod == 0){
             res.status(400).send("Your don't have access");
         }else{
-            let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
             let classes = await pool.query("select c.* from staff s, class c where s.branch_ID = c.branch_ID and s.ID = ?", [req.cookies.staff.ID]);
             let students = await pool.query("select s.name, college_ID from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
-
+            let batches = await pool.query("select * from batch");
+            console.log(batches);
             console.log(classes);
-            res.render("mng-student.ejs", {classes: classes[0], students: students[0]});
+            console.log(students);
+            console.log(result);
+            res.render("mng-student.ejs", {classes: classes[0], students: students[0], batches: batches[0],branch:result[0][0].branch_ID});
         }
     }
 });
@@ -297,6 +299,40 @@ app.get("/staff/manage", async (req, res)=>{
 });
 
 
-app.post("/student/new", (req, res)=>{
+app.post("/student/new", async (req, res)=>{
+    let {name,dob,blood_type,student_ph,parent_ph,address,cur_class_id,validity,batch_id,branch_id} = req.body;
     console.log(req.body);
+    let st_count = await pool.query("select count(*) as count from student where batch_ID=?",[Number(batch_id)]);
+    
+    console.log(st_count);
+    let nxt_clgID = `${batch_id}${(st_count[0][0].count+1).toString().padStart(4,'0')}`;
+    nxt_clgID = Number(nxt_clgID);
+    console.log(nxt_clgID);
+    pool.query("INSERT into student (college_ID,name,batch_ID,branch_ID,cur_class_ID,password) values(?,?,?,?,?,?) ",[nxt_clgID,name,batch_id,branch_id,cur_class_id,password])
+        .then(()=>{
+            pool.query("INSERT into personal_info(college_ID,blood_type,DOB,personal+phone,parent_phone,address,validity) values(?,?,?,?,?,?,?)",[nxt_clgID,blood_type,dob,student_ph,parent_ph,address,validity]);
+        })
+        .then(()=>{
+            pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",[cur_class_id]);
+
+        })
+        .then((result)=>{
+            
+        })
+
+    //console.log(req.body);
 });
+
+
+function xyz(){
+    pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",['CSE_1_A'])
+      .then((result)=>{
+        result = result[0];
+        for(i=0;i<result.length;i++){
+            p
+            console.log(result[i].sub_code);
+
+        }
+      })
+}
+xyz();
