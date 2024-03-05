@@ -62,24 +62,22 @@ app.get("/student", (req, res)=>{
     
 });
 
-app.get("/staff", (req, res) => {
+app.get("/staff", async(req, res) => {
     if( !req.cookies.staff ) {//staff cookie is not present
         res.render("login.ejs");
     }
     else{//staff cookie is present
         pool.query("SELECT logged_in from staff where ID=?",[req.cookies.staff.ID])
-        .then((result) =>{
+        .then(async(result) =>{
             if(result[0][0].logged_in == 0){//staff cookie is present but logged_in is false (logged out)
                 res.render('login.ejs');
             }
             else{
-                pool.query("SELECT sa.*, s.is_hod from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
-                .then((result)=>{
-                    result=(result[0]);
-                    console.log(result);
-                    let is_hod = result[0].is_hod == 1;
-                    res.render('staffdashboard.ejs', {cards: result, hod: is_hod });
-                })
+                console.log(req.cookies.staff.ID)
+                let is_hod = await pool.query("SELECT is_hod from staff where ID = ? ",[req.cookies.staff.ID])
+                let access_datas = await pool.query("SELECT sa.* from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
+                is_hod = is_hod[0][0].is_hod == 1;
+                res.render('staffdashboard.ejs', {cards: access_datas[0], hod: is_hod });
                 
             }
         })
@@ -329,7 +327,6 @@ function xyz(){
       .then((result)=>{
         result = result[0];
         for(i=0;i<result.length;i++){
-            p
             console.log(result[i].sub_code);
 
         }
