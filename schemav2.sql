@@ -23,6 +23,8 @@ CREATE TABLE IF NOT EXISTS scheme(
     primary key(id, branch_ID),
     foreign key(branch_ID) references branch(id) ON DELETE CASCADE ON UPDATE CASCADE 
 );
+ALTER TABLE batch add column scheme_ID varchar(10);
+ALTER TABLE batch add constraint scheme_ID foreign key(scheme_ID) references scheme(id) on update cascade;
 
 CREATE TABLE IF NOT EXISTS subjects(
     sub_code varchar(10) primary key,
