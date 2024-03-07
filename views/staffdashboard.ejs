@@ -14,9 +14,36 @@
         <p class="logo-txt">Dashboard</p>
         <% if(hod){ %>
             <div id="nav-btns-cont">
-                <button class="nav-btns" id="mng-btn1" onclick="window.location.href='/student/manage'">Manage Student</button>
-                <button class="nav-btns" id="mng-btn2" onclick="window.location.href='/staff/manage'">Manage Staff</button>
+                <nav>
+                    <div id="mng-div">
+                        <h2>MANAGE</h2>
+                        <img src="/dropdown.svg"  class="pic" onclick="toggleMenu()">
+                    </div>
+                    
+                    <div class="sub-menu-wrap" id="subMenu">
+                        <div class="sub-menu">
+                            <a href="#" class="sub-menu-link">
+                                <p>Manage Staff</p>
+                                <span>></span>
+                            </a>
+                            <a href="#" class="sub-menu-link">
+                                <p>Manage Student</p>
+                                <span>></span>
+                            </a>
+                        
+                        </div>
+                    </div>
+
+                </nav>
+
             </div>
+            <script>
+                let subMenu = document.getElementById("subMenu");
+
+                function toggleMenu(){
+                    subMenu.classList.toggle("open-menu");
+                }
+            </script>
         <% } %>
         <button id="logout">
             <img src="/logout.svg" alt="" id="logout">
