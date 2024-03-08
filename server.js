@@ -298,38 +298,47 @@ app.get("/staff/manage", async (req, res)=>{
 
 
 app.post("/student/new", async (req, res)=>{
-    let {name,dob,blood_type,student_ph,parent_ph,address,cur_class_id,validity,batch_id,branch_id} = req.body;
+    let {name,dob,blood_type,student_ph,parent_ph,address,cur_class_id,validity,batch_id,branch_id,password} = req.body;
     console.log(req.body);
     let st_count = await pool.query("select count(*) as count from student where batch_ID=?",[Number(batch_id)]);
-    
+    console.log(batch_id);
+    console.log(branch_id);
     console.log(st_count);
     let nxt_clgID = `${batch_id}${(st_count[0][0].count+1).toString().padStart(4,'0')}`;
     nxt_clgID = Number(nxt_clgID);
     console.log(nxt_clgID);
     pool.query("INSERT into student (college_ID,name,batch_ID,branch_ID,cur_class_ID,password) values(?,?,?,?,?,?) ",[nxt_clgID,name,batch_id,branch_id,cur_class_id,password])
         .then(()=>{
-            pool.query("INSERT into personal_info(college_ID,blood_type,DOB,personal+phone,parent_phone,address,validity) values(?,?,?,?,?,?,?)",[nxt_clgID,blood_type,dob,student_ph,parent_ph,address,validity]);
+            pool.query("INSERT into personal_info(college_ID,blood_type,DOB,personal_phone,parent_phone,address,validity) values(?,?,?,?,?,?,?)",[nxt_clgID,blood_type,dob,student_ph,parent_ph,address,validity]);
         })
         .then(()=>{
-            pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",[cur_class_id]);
+            
+           return pool.query("SELECT sub.sub_code from subjects sub, scheme sc,batch b where b.scheme_ID=sc.id and sc.id=sub.scheme_ID and b.id=? and sc.branch_id=?",[batch_id,branch_id]);
 
         })
-        .then((result)=>{
-            
+        .then(async(result)=>{
+            console.log(result);
+            result = result[0];
+            for(i=0;i<result.length;i++) {
+                await pool.query("INSERT into marks(college_ID,sub_code) values(?,?)",[nxt_clgID,result[i].sub_code]);
+            }
+        })
+        .catch((error)=>{
+            console.log(error);
         })
 
     //console.log(req.body);
 });
 
 
-function xyz(){
-    pool.query("SELECT sub_code from subjects s,class c where s.sem_ID=c.sem_ID and c.id=?",['CSE_1_A'])
-      .then((result)=>{
-        result = result[0];
-        for(i=0;i<result.length;i++){
-            console.log(result[i].sub_code);
+// function xyz(){
+//       .then((result)=>{
+//         result = result[0];
+//         console.log(result)
+//         for(i=0;i<result.length;i++){
+//             console.log(result[i].sub_code);
 
-        }
-      })
-}
-xyz();
+//         }
+//       })
+// }
+// xyz();

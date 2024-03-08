@@ -7,10 +7,7 @@ CREATE TABLE IF NOT EXISTS branch(
     name varchar(50)
 );
 
-CREATE TABLE IF NOT EXISTS batch(
-    id int primary key
 
-);
 
 CREATE TABLE IF NOT EXISTS sem(
     id int primary key
@@ -20,19 +17,24 @@ CREATE TABLE IF NOT EXISTS scheme(
     id varchar(10),
     year int,
     branch_ID varchar(5),
-    primary key(id, branch_ID),
+    primary key(id),
     foreign key(branch_ID) references branch(id) ON DELETE CASCADE ON UPDATE CASCADE 
 );
-ALTER TABLE batch add column scheme_ID varchar(10);
-ALTER TABLE batch add constraint scheme_ID foreign key(scheme_ID) references scheme(id) on update cascade;
+
+CREATE TABLE IF NOT EXISTS batch(
+    id int,
+    scheme_ID varchar(10),
+    primary key(id,scheme_ID),
+    foreign key(scheme_ID) references scheme(id) ON UPDATE CASCADE
+);
 
 CREATE TABLE IF NOT EXISTS subjects(
-    sub_code varchar(10) primary key,
+    sub_code varchar(10),
     scheme_ID varchar(10),
     name varchar(70),
     credits int,
     sem_ID int,
-
+    primary key(sub_code,scheme_ID),
     foreign key(scheme_ID) references scheme(id) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sem_ID) references sem(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
