@@ -74,10 +74,11 @@ app.get("/staff", async(req, res) => {
             }
             else{
                 console.log(req.cookies.staff.ID)
-                let is_hod = await pool.query("SELECT is_hod from staff where ID = ? ",[req.cookies.staff.ID])
+                let hod = await pool.query("SELECT * from staff where ID = ? ",[req.cookies.staff.ID])
                 let access_datas = await pool.query("SELECT sa.* from staff_access sa ,class c, staff s WHERE c.id = sa.class_ID  and staff_id =? and s.ID = sa.staff_ID",[req.cookies.staff.ID])
-                is_hod = is_hod[0][0].is_hod == 1;
-                res.render('staffdashboard.ejs', {cards: access_datas[0], hod: is_hod });
+                let is_hod = hod[0][0].is_hod == 1;
+                let hod_branch = hod[0][0].branch_ID;
+                res.render('staffdashboard.ejs', {cards: access_datas[0], hod: is_hod,branch:hod_branch });
                 
             }
         })
@@ -282,16 +283,21 @@ app.get("/student/manage", async (req, res)=>{
     }
 });
 
-app.get("/staff/manage", async (req, res)=>{
+app.get("/staff/manage/:branch", async (req, res)=>{
+    console.log(req.params.branch);
+
     if(!req.cookies.staff){
         res.render("login.ejs");
     }else{
         let result = await pool.query("select is_hod from staff where ID = ?", [req.cookies.staff.ID]);
         if(result[0][0].is_hod == 0){
             res.status(400).send("Your don't have access");
-        }else{
-            let result = await pool.query("select * from student s, staff st where s.branch_ID = st.branch_ID and st.ID = ?", [req.cookies.staff.ID]);
-            res.render("mng-staff.ejs");
+        }
+        else{
+            let result = await pool.query("SELECT * FROM staff WHERE branch_ID = ?",[req.params.branch]);
+            result = result[0];
+            console.log(result);
+            res.render("mng-staff.ejs",{staff:result});
         }
     }
 });
