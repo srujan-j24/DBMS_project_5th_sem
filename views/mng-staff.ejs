@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,5 +12,34 @@
         </form>
     </dialog>
     <button id="" onclick="document.getElementById('do').showModal()" >show</button>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage staff</title>
+    <link rel="stylesheet" href="/mng-staff.css">
+</head>
+<body>
+    <div id="navigation">
+        <p id="logo-txt">Manage Staff</p>
+        <div id="nav-btns-cont">
+            <button id="new-btn" class="nav-btns" onclick="toggleDialog()">Add Staff</button>
+        </div>
+        <button id="logout">
+            <img src="/logout.svg" alt="">
+        </button>
+    </div>
+    <hr>
+    <div id="table">
+        <% for(let i = 0; i < staff.length; i++) { %>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= staff[i].name %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= staff[i].staff_ID %></div>
+        <% } %>
+    </div>
+    
 </body>
 </html>
