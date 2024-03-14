@@ -273,7 +273,7 @@ dialog > hr{
 
 #table{
     display: grid;
-    grid-template-columns: 3rem auto auto;
+    grid-template-columns: 1fr;
     grid-auto-rows: 3rem;
     margin: 2rem;
     box-sizing: border-box;
@@ -285,7 +285,9 @@ dialog > hr{
     height: 3rem;
     display: flex;
     align-items: center;
-}
+    padding-inline-start: 1rem;
+    gap: 2rem;
+}   
 #table > .si{
     padding-inline-start: 1rem;
     box-sizing: border-box;
