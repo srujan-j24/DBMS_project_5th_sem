@@ -297,10 +297,8 @@ nav{
     display: flex;
     align-items: center;
     margin-inline: 2rem;
-
+    cursor: pointer;
 }
 #mng-div > h2{
     margin:0;
-    
-   
 }

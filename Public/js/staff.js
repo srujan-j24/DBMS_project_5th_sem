@@ -16,3 +16,4 @@ buttons.forEach((button)=>{
        window.location.href = route
     })
 })
+
