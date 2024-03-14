@@ -329,6 +329,9 @@ app.post("/student/new", async (req, res)=>{
                 await pool.query("INSERT into marks(college_ID,sub_code) values(?,?)",[nxt_clgID,result[i].sub_code]);
             }
         })
+        .then(()=>{
+            res.status(200).redirect("/student/manage")
+        })
         .catch((error)=>{
             console.log(error);
         })
