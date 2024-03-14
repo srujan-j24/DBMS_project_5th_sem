@@ -351,3 +351,16 @@ app.post("/student/new", async (req, res)=>{
 //       })
 // }
 // xyz();
+app.post("/staff/access/:staff_id",async(req, res)=>{
+    let (sub_code,class_ID) = req.body;
+    console.log(req.body);
+
+});
+app.post("/staff/access/:staff_id/add/",async(req, res)=>{
+
+});
+app.post("/staff/access/:staff_id/del/",async(req, res)=>{
+
+});
+
+
