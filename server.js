@@ -352,8 +352,12 @@ app.post("/student/new", async (req, res)=>{
 // }
 // xyz();
 app.post("/staff/access/:staff_id",async(req, res)=>{
-    let (sub_code,class_ID) = req.body;
-    console.log(req.body);
+    console.log(req.params.staff_id); 
+
+    let accesss = await pool.query("SELECT * from staff_access where staff_id = ?",[req.params.staff_id]);
+    console.log(accesss);
+    res.status(200).send(accesss[0]);
+
 
 });
 app.post("/staff/access/:staff_id/add/",async(req, res)=>{
