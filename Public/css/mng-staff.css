@@ -75,11 +75,6 @@ body{
     outline-offset: 0.25rem;
     background-color: rgba(0, 0, 0, 0.1);
 }
-#logo-txt{
-    font-family: "Inknut Antiqua", serif;
-    font-size: 2rem;
-    margin: 0;
-}
 hr{
     margin: 0;
     place-self: center;
@@ -285,9 +280,17 @@ dialog > hr{
     height: 3rem;
     display: flex;
     align-items: center;
-    padding-inline-start: 1rem;
+    padding-inline: 1rem;
     gap: 2rem;
-}   
+    justify-content: space-between;
+}
+#table > div > div{
+    display: flex;
+    gap: 2rem;
+}
+#table > div > button{
+    height: 75%;
+}
 #table > .si{
     padding-inline-start: 1rem;
     box-sizing: border-box;
@@ -301,4 +304,9 @@ dialog > hr{
   border-width: 4px;
   border-radius: 0;
   border-image-source: linear-gradient(180deg, #fff 0%, #03aaff 45%, #03aaff 55%, #fff 100%);;
+}
+
+#logo-txt{
+    font-size: 2rem;
+    margin: 0;
 }
