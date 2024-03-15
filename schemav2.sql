@@ -1,4 +1,4 @@
-CREATE DATABASE IF NOT EXISTS studentdb;
+eCREATE DATABASE IF NOT EXISTS studentdb;
 
 USE studentdb;
 
