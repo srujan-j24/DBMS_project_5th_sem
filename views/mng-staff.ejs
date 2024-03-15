@@ -13,12 +13,16 @@
     <dialog id="dialog">
         <div id="adddiv">
             <select name="" id="classes">
-
+                <% for(let i=0;i<class_ary.length;i++) { %>
+                    <option value="<%= class_ary[i].id %>"><%= class_ary[i].id %></option>
+                    <% } %>
             </select>
             <select name="" id="subjects">
-    
+                <% for(let i=0;i<subcode_ary.length;i++) {%>
+                    <option value="<%= subcode_ary[i].sub_code %>"><%= subcode_ary[i].sub_code %></option>
+                <% } %>
             </select>
-            <button class="add">Add</button>
+            <button class="add" id="add-btn" onclick="addAccess()">Add</button>
         </div>
         
         <div id="dialogAccess">

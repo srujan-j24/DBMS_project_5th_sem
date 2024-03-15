@@ -295,9 +295,13 @@ app.get("/staff/manage/:branch", async (req, res)=>{
         }
         else{
             let result = await pool.query("SELECT * FROM staff WHERE branch_ID = ?",[req.params.branch]);
+            let classes = await pool.query("SELECT id from class ");
+            let sub_codes = await pool.query("SELECT sub_code from subjects");
             result = result[0];
             console.log(result);
-            res.render("mng-staff.ejs",{staff:result});
+            console.log(classes[0]);
+            console.log(sub_codes[0]);
+            res.render("mng-staff.ejs",{staff:result,class_ary:classes[0],subcode_ary:sub_codes[0]});
         }
     }
 });
@@ -360,8 +364,17 @@ app.post("/staff/access/:staff_id",async(req, res)=>{
 
 
 });
-app.post("/staff/access/:staff_id/add/",async(req, res)=>{
-
+app.post("/staff/access/:staff_id/add/:class/:sub_code",(req, res)=>{
+    console.log(req.params)
+    pool.query("INSERT into staff_access(staff_id,sub_code,class_ID) values(?,?,?) ",[req.params.staff_id,req.params.sub_code,req.params.class])
+        .then(()=>{
+            console.log("then");
+            res.status(200).send("Success")
+        })
+        .catch((err)=>{
+            console.log("catch");
+            res.status(500).send({error:err});
+        })
 });
 app.post("/staff/access/:staff_id/del/",async(req, res)=>{
 
