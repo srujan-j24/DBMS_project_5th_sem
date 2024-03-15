@@ -11,6 +11,8 @@
 </head>
 <body>
     <dialog id="dialog">
+        <button id="dig-x" onclick="toggleDialog()"></button>
+
         <div id="adddiv">
             <select name="" id="classes">
                 <% for(let i=0;i<class_ary.length;i++) { %>
@@ -24,9 +26,8 @@
             </select>
             <button class="add" id="add-btn" onclick="addAccess()">Add</button>
         </div>
-        
+        <h3>Access</h3>
         <div id="dialogAccess">
-            <h3>Access</h3>
             
         </div>
     </dialog>
