@@ -52,7 +52,7 @@
 --  (20210004, "21CIV14", -1, -1, -1, -1, -1, -1);
 
  insert into staff values
--- ("ST_0001","Ramesh T",0,0,"r123@","CSE",0),
+ ("ST_0001","Ramesh T",0,0,"r123@","CSE",0),
 -- ("ST_0002","Suresh U",0,0,"su123@","CSE",0),
    ("ST_0003","Akasha k",1,0,"ak123@","CSE",0);
 
