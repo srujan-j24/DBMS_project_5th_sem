@@ -1,7 +1,7 @@
 const express = require("express");
 const path = require("path");
-const bodyparser = require("body-parser")
-const cookie = require("cookie-parser")
+const bodyparser = require("body-parser")   //http req - extracts body gives to server
+const cookie = require("cookie-parser")        //token for authentication
 const port = "3000";
 const app = express();
 const mysql = require("mysql2");
@@ -9,7 +9,7 @@ const dotenv = require("dotenv");
 const { access } = require("fs");
 dotenv.config();
 
-const pool = mysql.createPool({
+const pool = mysql.createPool({                 //pool-bunch of connection
     host: 'localhost',
     port: process.env.PORTNUM,       
     user: process.env.DBUSER,
@@ -378,6 +378,7 @@ app.post("/staff/access/:staff_id/add/:class/:sub_code",(req, res)=>{
 });
 app.post("/staff/access/:staff_id/del/:class/:sub_code",async(req, res)=>{
     console.log(req.params);
+    await pool.query("DELETE FROM staff_access where staff_id = ? and sub_code = ? and class_ID = ? ",[req.params.staff_id,req.params.sub_code,req.params.class]);
 });
 
 

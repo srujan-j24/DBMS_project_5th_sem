@@ -149,9 +149,9 @@ dialog{
     padding-top: 2rem;
 }
 #dig-x{
-    position: absolute;
-    right: 1rem;
-    top: 1rem;
+    position: relative;
+    right: -16rem;
+    top: -1rem;
     border: none;
     box-sizing: border-box;
     height: 1.5rem;

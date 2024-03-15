@@ -1,4 +1,5 @@
 let dialog = document.getElementById("dialog");
+let dialogActive = false;
 let dialogAccess = document.getElementById("dialogAccess");
 let classes = document.getElementById("classes");
 let sub_code = document.getElementById("subjects");
@@ -25,11 +26,11 @@ function reqStaffaccess(staff_id){
             }
         })
         .fail((a,b,c)=>{
-            console.log("fail");
-            console.log(a);
-            console.log(b);
-            console.log(c);
-            alert("Something went wrong");
+            // console.log("fail");
+            // console.log(a);
+            // console.log(b);
+            // console.log(c);
+            // alert("Something went wrong");
         })
 }
 
@@ -40,13 +41,23 @@ function addAccess() {
     console.log(selectedsubject);
     $.ajax({type:"POST",url:`/staff/access/${cur_staff}/add/${selectedClass}/${selectedsubject}`})
         .done(()=>{
-            location.reload();
+            
         })
-        .fail(()=>{
-
+        .fail((a,b,c)=>{
+            console.log("fail");
+            console.log(a);
+            console.log(b);
+            console.log(c);
+            alert("Access already exist");
         })
 }
 
 function removeAccess(route){
     $.ajax({type: 'POST', url: route})
 }
+
+function toggleDialog(){
+    dialogActive == false?  dialog.showModal() : dialog.close();
+    dialogActive = !dialogActive;
+    dialogHTML.innerText = " ";
+ }
