@@ -42,7 +42,7 @@ function addAccess() {
     console.log(selectedsubject);
     $.ajax({type:"POST",url:`/staff/access/${cur_staff}/add/${selectedClass}/${selectedsubject}`})
         .done(()=>{
-           location.reload(); 
+            location.reload();
         })
         .fail((a,b,c)=>{
             console.log("fail");
