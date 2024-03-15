@@ -376,8 +376,8 @@ app.post("/staff/access/:staff_id/add/:class/:sub_code",(req, res)=>{
             res.status(500).send({error:err});
         })
 });
-app.post("/staff/access/:staff_id/del/",async(req, res)=>{
-
+app.post("/staff/access/:staff_id/del/:class/:sub_code",async(req, res)=>{
+    console.log(req.params);
 });
 
 
