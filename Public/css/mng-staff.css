@@ -146,7 +146,8 @@ hr{
 dialog{
     border-radius: 1rem;
     padding-block: 3rem;
-    padding-top: 2rem;
+    padding: 2rem;
+    overflow: hidden;
 }
 #dig-x{
     position: relative;
@@ -311,8 +312,14 @@ dialog > hr{
     margin: 0;
 }
 #dialogAccess{
-    width:30vh;
     height: 25vh;
+    overflow-y: scroll;
+    display: grid;
+    gap: 0.5rem;
+    grid-auto-rows: 1.5rem;
+}
+#dialogAccess::-webkit-scrollbar{
+    display: none;
 }
 #adddiv{
     display:flex ;
@@ -321,4 +328,9 @@ dialog > hr{
 }
 #adddiv > *{
     flex-grow: 1;
+}
+.access-li{
+    display: flex;
+    justify-content: space-between;
+    
 }

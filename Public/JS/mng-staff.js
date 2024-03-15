@@ -5,6 +5,7 @@ let classes = document.getElementById("classes");
 let sub_code = document.getElementById("subjects");
 let cur_staff = null;
 function reqStaffaccess(staff_id){
+    dialogActive = true;
     cur_staff = staff_id;
     $.ajax({type:"POST",url:`/staff/access/${staff_id}`})
         .done((res)=>{
@@ -17,7 +18,7 @@ function reqStaffaccess(staff_id){
                 let newdiv = document.createElement("div");
                 newbtn.setAttribute("onclick", `removeAccess('/staff/access/${cur_staff}/del/${res[i].class_ID}/${res[i].sub_code}')`);
                 
-                newdiv.classList.add("access_list");
+                newdiv.classList.add("access-li");
                 newdiv.appendChild(newp);
                 newdiv.appendChild(newbtn);
                 newbtn.innerText = "remove";
@@ -41,7 +42,7 @@ function addAccess() {
     console.log(selectedsubject);
     $.ajax({type:"POST",url:`/staff/access/${cur_staff}/add/${selectedClass}/${selectedsubject}`})
         .done(()=>{
-            
+           location.reload(); 
         })
         .fail((a,b,c)=>{
             console.log("fail");
@@ -57,7 +58,7 @@ function removeAccess(route){
 }
 
 function toggleDialog(){
+    dialogAccess.innerHTML = " ";
     dialogActive == false?  dialog.showModal() : dialog.close();
     dialogActive = !dialogActive;
-    dialogHTML.innerText = " ";
  }
