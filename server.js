@@ -382,3 +382,16 @@ app.post("/staff/access/:staff_id/del/:class/:sub_code",async(req, res)=>{
 });
 
 
+app.get("/subject/manage/:branch",async(req,res)=>{
+    if(req.cookies.staff){
+        let is_hod = await pool.query("SELECT is_hod from staff where ID =?",[req.cookies.staff.ID]);
+        
+        is_hod = is_hod[0][0].is_hod;
+        if(is_hod == 1) {
+            res.render("mng-sub.ejs");
+        }
+        else{
+            res.status(400).send("Invalid request");
+        }
+    }
+})
