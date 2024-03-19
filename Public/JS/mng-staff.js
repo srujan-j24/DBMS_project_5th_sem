@@ -21,6 +21,9 @@ function reqStaffaccess(staff_id){
                 newdiv.classList.add("access-li");
                 newdiv.appendChild(newp);
                 newdiv.appendChild(newbtn);
+                if(i %2 != 0){
+                    newdiv.classList.add("light-grey")
+                }
                 newbtn.innerText = "remove";
                 newp.innerText = `${res[i].sub_code} ${res[i].class_ID}` 
                 dialogAccess.appendChild(newdiv)

@@ -38,6 +38,12 @@ body{
     aspect-ratio: 3.5 / 1;
     border-radius: 2rem;
     background-color: #ffdab9;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.savebtn{
+    background-color: rgba(209, 241, 145, 0.872) !important;
 }
 a{
     text-decoration: none;

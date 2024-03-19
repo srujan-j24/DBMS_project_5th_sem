@@ -20,10 +20,11 @@
 
         <div id="nav-btns-cont">
             <% if(editoption) { %>
-                <button id="edit-btn" class="nav-btns">Save</button>
+                <button id="edit-btn" class="nav-btns savebtn">Save</button>
     
             <% } else { %>
-                <button id="edit-btn" class="nav-btns"><a href="/class/<%= class_ID %>/<%= sub_code%>/edit">Edit</a></button>
+
+                <a href="/class/<%= class_ID %>/<%= sub_code%>/edit" class="nav-btns" id="edit-btn">Edit</a>
             <% } %>
             
         </div>

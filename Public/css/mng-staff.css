@@ -148,6 +148,7 @@ dialog{
     padding-block: 3rem;
     padding: 2rem;
     overflow: hidden;
+    border: 1px solid black;
 }
 #dig-x{
     position: relative;
@@ -331,6 +332,7 @@ dialog > hr{
 }
 .access-li{
     display: flex;
+    align-items: center;
     justify-content: space-between;
     
 }
