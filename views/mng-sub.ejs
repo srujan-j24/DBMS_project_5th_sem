@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/mng-sub.css">
+    <title>Manage Subject</title>
+</head>
+<body>
+    <div id="navigation">
+        <p id="logo-txt">Manage Subject</p>
+        <div id="nav-btns-cont">
+            <button id="new-btn" class="nav-btns" onclick="toggleDialog()">Add Subject</button>
+        </div>
+        <button id="logout" onclick="document.location.href='/staff'">
+            <img src="/home.svg" alt="">
+        </button>
+    </div>
+    <hr>
+    <div id="table">
+            <div class="thead-div">SI.no.</div>
+            <div class="thead-div">Sub-code</div>
+            <div class="thead-div">Sub-name</div>
+            <div class="thead-div">Credits</div>
+        <% for(let i = 0; i < subs.length; i++) { %>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].sub_code %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].name %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].credits %></div>
+
+        <% } %>
+    </div>
+    <script src="/mng-student.js"></script>
+
+</body>
+</html>

@@ -273,7 +273,7 @@ dialog > hr{
 
 #table{
     display: grid;
-    grid-template-columns: 3rem auto auto;
+    grid-template-columns: 6rem auto auto;
     grid-auto-rows: 3rem;
     margin: 2rem;
     box-sizing: border-box;
@@ -299,4 +299,7 @@ dialog > hr{
   border-width: 4px;
   border-radius: 0;
   border-image-source: linear-gradient(180deg, #fff 0%, #03aaff 45%, #03aaff 55%, #fff 100%);;
+}
+.thead-div{
+    background-color:rgba(243, 177, 90, 0.796);
 }

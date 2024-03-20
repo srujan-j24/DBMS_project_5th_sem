@@ -93,6 +93,9 @@
     </div>
     <hr>
     <div id="table">
+        <div class="thead-div">SI.no.</div>
+        <div class="thead-div">Name</div>
+        <div class="thead-div">College_ID</div>
         <% for(let i = 0; i < students.length; i++) { %>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= students[i].name %></div>

@@ -388,7 +388,10 @@ app.get("/subject/manage/:branch",async(req,res)=>{
         
         is_hod = is_hod[0][0].is_hod;
         if(is_hod == 1) {
-            res.render("mng-sub.ejs");
+            let sub = await pool.query("SELECT sb.* from staff st, subjects sb, scheme sc where st.branch_ID = sc.branch_ID and sb.scheme_ID = sc.id and st.ID = ?",[req.cookies.staff.ID]);
+            sub = sub[0];
+            console.log(sub);
+            res.render("mng-sub.ejs",{subs:sub});
         }
         else{
             res.status(400).send("Invalid request");
