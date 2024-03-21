@@ -270,12 +270,13 @@ dialog > hr{
 
 #table{
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr 1fr ;
     grid-auto-rows: 3rem;
     margin: 2rem;
     box-sizing: border-box;
     border: 1px solid black;
     align-items: center;
+    
 }
 
 #table > div{
@@ -285,6 +286,9 @@ dialog > hr{
     padding-inline: 1rem;
     gap: 2rem;
     justify-content: space-between;
+}
+.thead-div{
+    background-color: #F5AD7C;
 }
 #table > div > div{
     display: flex;

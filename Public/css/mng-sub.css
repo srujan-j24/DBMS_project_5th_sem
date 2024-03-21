@@ -95,12 +95,14 @@ hr{
     box-sizing: border-box;
     border: 1px solid black;
     align-items: center;
+    
 }
 
 #table > div{
     height: 3rem;
     display: flex;
     align-items: center;
+    padding-inline-start: 1rem;
 }
 #table > .si{
     padding-inline-start: 1rem;
@@ -118,4 +120,32 @@ hr{
 }
 .thead-div{
     background-color: #f7d9c0c4;
+}
+#dialog-sub{
+    position: relative;
+    padding: 2rem;
+
+
+}
+#dialog-sub > form{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1rem;
+}
+.span2{
+    grid-column: span 2;
+}
+.span4{
+    grid-column: span 4;
+}
+#dig-x{
+    background-image: url("/x.svg");
+    height: 1.5rem;
+    width: 1.5rem;
+    background-position: center;
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+
+
 }

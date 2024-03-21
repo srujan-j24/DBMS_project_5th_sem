@@ -41,15 +41,14 @@
     <div id="table">
         <div class="thead-div">Staff ID</div>
         <div class="thead-div">Staff name</div>
-        <div class="thead-div">Manage</div>
+        <div class="thead-div">Manage Access</div>
         <% for(let i = 0; i < staff.length; i++) { %>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= staff[i].ID %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= staff[i].name %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>">
-                <div>
-                    <div><%= staff[i].ID %></div>
-                    <div><%= staff[i].name %></div>
-                </div>
                 <button onclick="reqStaffaccess('<%= staff[i].ID%>')">Manage Access</button>
             </div>
+            
         <% } %>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
