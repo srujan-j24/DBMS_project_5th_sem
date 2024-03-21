@@ -301,5 +301,5 @@ dialog > hr{
   border-image-source: linear-gradient(180deg, #fff 0%, #03aaff 45%, #03aaff 55%, #fff 100%);;
 }
 .thead-div{
-    background-color:rgba(243, 177, 90, 0.796);
+    background-color:rgb(243, 177, 90);
 }
