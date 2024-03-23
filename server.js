@@ -391,7 +391,35 @@ app.get("/subject/manage/:branch",async(req,res)=>{
             let sub = await pool.query("SELECT sb.* from staff st, subjects sb, scheme sc where st.branch_ID = sc.branch_ID and sb.scheme_ID = sc.id and st.ID = ?",[req.cookies.staff.ID]);
             sub = sub[0];
             console.log(sub);
-            res.render("mng-sub.ejs",{subs:sub});
+            let scheme_ids = await pool.query("SELECT id from scheme where branch_ID = ? ",[req.params.branch]);
+            let sem_ids = await pool.query("SELECT id from sem");
+            scheme_ids = scheme_ids[0];
+            sem_ids = sem_ids[0];
+            console.log(scheme_ids);
+            console.log(sem_ids);
+            res.render("mng-sub.ejs",{subs:sub,scheme_ids:scheme_ids,sem_ids:sem_ids});
+        }
+        else{
+            res.status(400).send("Invalid request");
+        }
+    }
+})
+
+app.post("/subject/add",async(req,res)=>{
+    if(req.cookies.staff){
+        let is_hod = await pool.query("SELECT is_hod from staff where ID =?",[req.cookies.staff.ID]);
+        
+        is_hod = is_hod[0][0].is_hod;
+        if(is_hod == 1) {
+           console.log(req.body);
+           let {name,scheme,subcode,credits,sem} = req.body;
+            pool.query("INSERT INTO subjects values(?,?,?,?,?)",[subcode,scheme,name,credits,sem])
+            .then(()=>{
+                res.status(200).send("Success");
+            })
+            .catch(()=>{
+                res.status(400).send("Something went wrong");
+            })
         }
         else{
             res.status(400).send("Invalid request");

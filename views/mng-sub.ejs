@@ -12,21 +12,29 @@
         <form action="">
             
                 <label for="" class="span2">Name</label>
-                <input type="text" class="span2">
+                <input type="text" class="span2" id="sub_name">
             
             
                 <label for="">Scheme_ID</label>
-                <input type="text">
+                <select id="sub_scheme">
+                    <% for(let i=0;i<scheme_ids.length;i++) { %>
+                        <option value="<%= scheme_ids[i].id %>"><%= scheme_ids[i].id %></option>
+                        <% } %>
+                </select>
             
                 <label for="">Sub_code</label>
-                <input type="text">
+                <input type="text" id="sub_code">
            
                 <label for="">Credits</label>
-                <input type="text">
+                <input type="text" id="sub_credits">
             
                 <label for="">Sem_ID</label>
-                <input type="text">
-            <button type="submit" class="span4">Add</button>
+                <select id="sub_sem">
+                    <% for(let i=0;i<sem_ids.length;i++) { %>
+                        <option value="<%= sem_ids[i].id %>"><%= sem_ids[i].id %></option>
+                        <% } %>
+                </select>
+            <button class="span4" id="add-btn">Add</button>
         </form>
         
     </dialog>
@@ -53,6 +61,7 @@
 
         <% } %>
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="/mng-sub.js"></script>
 
 </body>
