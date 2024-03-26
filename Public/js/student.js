@@ -122,7 +122,15 @@ function calculate_gradepoint(CIE,SEE){
 
 }
 
-
+function calculateCIE(ia_avg,as_avg,q1) {
+    if(ia_avg != -1 && as_avg != -1 && q1 != -1){
+        cie = ia_avg+as_avg+q1;
+        return cie;
+    }
+    else {
+        return -1;
+    }
+}
 
 
 
