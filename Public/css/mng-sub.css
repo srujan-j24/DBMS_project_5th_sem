@@ -146,6 +146,17 @@ hr{
     position: absolute;
     top: 0.25rem;
     right: 0.25rem;
-
-
+}
+form > button{
+    width: 50%;
+    justify-self: center;
+}
+form > div{
+    grid-column: span 4;
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    input{
+        flex-grow: 0.5;
+    }
 }
