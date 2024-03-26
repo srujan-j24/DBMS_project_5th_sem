@@ -89,7 +89,7 @@ hr{
 }
 #table{
     display: grid;
-    grid-template-columns: 5rem auto auto auto;
+    grid-template-columns: 5rem auto auto auto 9rem;
     grid-auto-rows: 3rem;
     margin: 2rem;
     box-sizing: border-box;
@@ -120,6 +120,7 @@ hr{
 }
 .thead-div{
     background-color: #f7d9c0c4;
+    text-align: center;
 }
 #dialog-sub{
     position: relative;
@@ -219,4 +220,14 @@ form > button{
     height: 3rem !important;
     border-radius: 3rem;
     background-color: #03abff9b;
+}
+
+#sub-delete{
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    background-image: url("/delete.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: transparent;
+    border: none;
 }

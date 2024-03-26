@@ -54,11 +54,16 @@
             <div class="thead-div">Sub-code</div>
             <div class="thead-div">Sub-name</div>
             <div class="thead-div">Credits</div>
+            <div class="thead-div">Delete</div>
         <% for(let i = 0; i < subs.length; i++) { %>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%> si"><%= i + 1 %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].sub_code %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].name %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].credits %></div>
+            <div class="<%= i%2 != 0 ? 'light-grey' : ''%>">
+                <button id="sub-delete" ></button>
+            </div>
+            
 
         <% } %>
     </div>
