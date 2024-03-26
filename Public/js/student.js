@@ -26,7 +26,7 @@ function append_data(data_array) {
     }
     let table = document.getElementById("table");
     for(i=0;i<data_array.length;i++) {
-        let {as1,as2,credits,ia1,ia2,ia3,name,q1,sub_code} = data_array[i]
+        let {as1,as2,credits,ia1,ia2,ia3,name,q1,sub_code,see} = data_array[i]
         table.appendChild(create_data_div(sub_code,name));
         table.appendChild(create_data_div(credits));
         table.appendChild(create_data_div(" "));
@@ -38,8 +38,8 @@ function append_data(data_array) {
         table.appendChild(create_data_div(ia3));
         let avg = -1;
         if(ia1!= -1 && ia2!=-1 && ia3!=-1) {
-            avg = Math.round((ia1+ia2+ia3)/3);
-            table.appendChild(create_data_div(avg));
+            ia_avg = Math.round((ia1+ia2+ia3)/3);
+            table.appendChild(create_data_div(ia_avg));
         }
         else {
             table.appendChild(create_data_div(" "));
@@ -47,19 +47,81 @@ function append_data(data_array) {
         table.appendChild(create_data_div(as1));
         table.appendChild(create_data_div(as2));
         if(as1!=-1 && as2!=-1) {
-            avg = Math.round((as1+as2)/2);
-            table.appendChild(create_data_div(avg));
+            as_avg = Math.round((as1+as2)/2);
+            table.appendChild(create_data_div(as_avg));
         }
         else {
             table.appendChild(create_data_div(" "));
         }
-        table.appendChild(create_data_div(q1));
-        table.appendChild(create_data_div(" "));
-        table.appendChild(create_data_div(" "));
-        table.appendChild(create_data_div(" "));
-        table.appendChild(create_data_div(" "));
+        if(q1==-1) {
+            table.appendChild(create_data_div(" ")); 
+        }
+        else {
+            table.appendChild(create_data_div(q1));
+        }
+        CIE = calculateCIE(ia_avg,as_avg,q1);
+        if(CIE != -1) {
+            table.appendChild(create_data_div(CIE));
+        }
+        else {
+            table.appendChild(create_data_div(" ")); 
+        }
+        if(see != -1){
+          table.appendChild(create_data_div(see));
+          gradeobj = calculate_gradepoint(CIE,see);
+          table.appendChild(create_data_div(gradeobj.grade_point));
+          table.appendChild(create_data_div(gradeobj.grade));  
+        }
+        else{
+            table.appendChild(create_data_div(" ")); 
+            table.appendChild(create_data_div(" "));
+            table.appendChild(create_data_div(" "));
+        }
+
+      
     }
 }
+
+function calculate_gradepoint(CIE,SEE){
+    let total = CIE+SEE;
+    let grade = "";
+    let grade_point = "";
+    if(total<=100 || total>=90){
+        grade = "O";
+        grade_point = "10";
+    }
+    else if(total<=89 || total>=80){
+        grade = "A+";
+        grade_point = "9";
+    }
+    else if(total<=79 || total>=70){
+        grade = "A";
+        grade_point = "8";
+    }
+    else if(total<=69 || total>=60){
+        grade = "B+";
+        grade_point = "7";
+    }
+    else if(total<59 || total>=55){
+        grade = "B";
+        grade_point = "6";
+    }
+    else if(total<50 || total>=54){
+        grade = "C";
+        grade_point = "5";
+    }
+    else if(total<40 || total>=49){
+        grade = "P";
+        grade_point = "4";
+    }
+    else if(total<39 || total>=0){
+        grade = "F";
+        grade_point = "0";
+    }
+    return {grade_point,grade}
+
+}
+
 
 
 
