@@ -7,7 +7,7 @@
     <title>Manage Subject</title>
 </head>
 <body>
-    <dialog id="dialog-sub">
+    <dialog id="dialog-sub" class="border-gradient">
         <button id="dig-x" onclick="toggleDialog()"></button>
         <form action="">
             <div>
@@ -35,7 +35,7 @@
                         <option value="<%= sem_ids[i].id %>"><%= sem_ids[i].id %></option>
                         <% } %>
                 </select>
-            <button class="span4" id="add-btn">Add</button>
+            <button class="span4 nav-btns" id="add-btn">Add</button>
         </form>
         
     </dialog>

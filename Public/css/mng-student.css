@@ -174,7 +174,7 @@ dialog > h2{
 }
 
 dialog > form{
-    margin-block-start: 2rem;
+    /* margin-block-start: 2rem; */
     padding-inline: 2.5rem;
     gap: 2rem;
     display: grid;
