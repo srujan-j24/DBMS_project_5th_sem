@@ -147,7 +147,6 @@ hr{
     top: 0.25rem;
     right: 0.25rem;
 }
-<<<<<<< Updated upstream
 form > button{
     width: 50%;
     justify-self: center;
@@ -161,6 +160,3 @@ form > div{
         flex-grow: 0.5;
     }
 }
-=======
-
->>>>>>> Stashed changes

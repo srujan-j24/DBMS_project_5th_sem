@@ -125,6 +125,8 @@ function calculate_gradepoint(CIE,SEE){
 
 
 
+
+
 buttons.forEach((button,index) =>{
     button.addEventListener('click',()=> {
         

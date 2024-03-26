@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS marks(
     as1 float default -1,
     as2 float default -1,
     q1 float default -1,
+    see float default -1,
     primary key(college_ID, sub_code),
     foreign key(college_ID) references student(college_ID) ON DELETE CASCADE ON UPDATE CASCADE,
     foreign key(sub_code) references subjects(sub_code)  ON DELETE CASCADE ON UPDATE CASCADE
