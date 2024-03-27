@@ -61,6 +61,45 @@ function append_data(data_array) {
     }
 }
 
+function calculate_gradepoint(CIE,SEE){
+    let total = CIE+SEE;
+    let grade = "";
+    let grade_point = "";
+    if(total<=100 || total>=90){
+        grade = "O";
+        grade_point = "10";
+    }
+    else if(total<=89 || total>=80){
+        grade = "A+";
+        grade_point = "9";
+    }
+    else if(total<=79 || total>=70){
+        grade = "A";
+        grade_point = "8";
+    }
+    else if(total<=69 || total>=60){
+        grade = "B+";
+        grade_point = "7";
+    }
+    else if(total<59 || total>=55){
+        grade = "B";
+        grade_point = "6";
+    }
+    else if(total<50 || total>=54){
+        grade = "C";
+        grade_point = "5";
+    }
+    else if(total<40 || total>=49){
+        grade = "P";
+        grade_point = "4";
+    }
+    else if(total<39 || total>=0){
+        grade = "F";
+        grade_point = "0";
+    }
+    return {grade_point,grade}
+
+}
 
 
 
