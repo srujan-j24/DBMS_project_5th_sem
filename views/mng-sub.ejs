@@ -61,7 +61,7 @@
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].name %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>"><%= subs[i].credits %></div>
             <div class="<%= i%2 != 0 ? 'light-grey' : ''%>">
-                <button id="sub-delete" ></button>
+                <button id="sub-delete" onclick="delete_sub('<%=subs[i].sub_code %>','<%= subs[i].scheme_ID%>')" ></button>
             </div>
             
 
