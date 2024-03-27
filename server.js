@@ -426,3 +426,24 @@ app.post("/subject/add",async(req,res)=>{
         }
     }
 })
+app.post("/subject/delete/:sub_code/:scheme_ID",async(req,res)=>{
+    if(req.cookies.staff){
+        let is_hod = await pool.query("SELECT is_hod from staff where ID =?",[req.cookies.staff.ID]);
+        
+        is_hod = is_hod[0][0].is_hod;
+        if(is_hod == 1) {
+           pool.query("DELETE FROM subjects where sub_code = ? and scheme_ID = ? ",[req.params.sub_code,req.params.scheme_ID])
+            .then(()=>{
+                res.status(200).send("Success");
+            })
+            .catch(()=>{
+                res.status(400).send("Something went wrong");
+            })
+        }
+        else{
+            res.status(400).send("Invalid request");
+        }
+    }
+
+    console.log(req.params);
+})

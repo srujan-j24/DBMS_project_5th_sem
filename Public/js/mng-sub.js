@@ -30,3 +30,14 @@ add_btn.addEventListener("click",(e)=>{
             alert("Something went wrong");
         })
 })
+
+function delete_sub(sub_code,scheme_ID){
+    $.ajax({type:"POST",url:`/subject/delete/${sub_code}/${scheme_ID}`})
+    .done(()=>{
+        window.location.reload();
+    })
+    .fail((xhr,status,error)=>{
+        alert("Something went wrong");
+    })
+
+}
