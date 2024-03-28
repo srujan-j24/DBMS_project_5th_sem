@@ -6,7 +6,6 @@ const port = "3000";
 const app = express();
 const mysql = require("mysql2");
 const dotenv = require("dotenv");
-const { access } = require("fs");
 dotenv.config();
 
 const pool = mysql.createPool({                 //pool-bunch of connection
@@ -15,7 +14,6 @@ const pool = mysql.createPool({                 //pool-bunch of connection
     user: process.env.DBUSER,
     password: process.env.DBPASSWORD,   
     database: process.env.DBNAME,
-    
 }).promise();
 
 app.use(express.static(path.join(__dirname, "/public/css")));

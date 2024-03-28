@@ -29,7 +29,6 @@ function append_data(data_array) {
         let {as1,as2,credits,ia1,ia2,ia3,name,q1,sub_code,see} = data_array[i]
         table.appendChild(create_data_div(sub_code,name));
         table.appendChild(create_data_div(credits));
-        table.appendChild(create_data_div(" "));
        
         table.appendChild(create_data_div(ia1));
         
